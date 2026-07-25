@@ -1,0 +1,152 @@
+.services-section {
+  padding: 120px 24px;
+  background-color: #000;
+  color: #fff;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow: hidden;
+}
+
+.services-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.services-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.section-label {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: #86868b;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.section-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+  background: linear-gradient(135deg, #fff 0%, #a1a1a6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+
+.service-card-wrapper {
+  perspective: 1000px;
+}
+
+.service-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+  padding: 48px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.1s ease-out, background 0.3s ease;
+  transform-style: preserve-3d;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+}
+
+.service-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.service-accent-line {
+  position: absolute;
+  top: 0;
+  left: 48px;
+  right: 48px;
+  height: 2px;
+  background: var(--accent-color);
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 2px 15px var(--accent-color);
+  opacity: 0.7;
+}
+
+.service-icon {
+  font-size: 3rem;
+  margin-bottom: 24px;
+  transform: translateZ(30px);
+}
+
+.service-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+  color: #f5f5f7;
+  transform: translateZ(20px);
+}
+
+.service-desc {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #a1a1a6;
+  margin: 0 0 32px 0;
+  flex-grow: 1;
+  transform: translateZ(15px);
+}
+
+.service-benefits {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  transform: translateZ(25px);
+}
+
+.service-benefits li {
+  display: flex;
+  align-items: center;
+  font-size: 0.95rem;
+  color: #f5f5f7;
+  margin-bottom: 12px;
+}
+
+.service-benefits li:last-child {
+  margin-bottom: 0;
+}
+
+.checkmark {
+  color: var(--accent-color);
+  margin-right: 12px;
+  font-weight: bold;
+}
+
+@media (max-width: 992px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .services-section {
+    padding: 80px 20px;
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+  }
+
+  .service-card {
+    padding: 32px;
+  }
+
+  .service-accent-line {
+    left: 32px;
+    right: 32px;
+  }
+}

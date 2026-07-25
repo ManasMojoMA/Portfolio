@@ -1,0 +1,18 @@
+.background-3d-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0; /* Sit behind page content */
+  pointer-events: none; /* Let clicks pass through */
+  background-color: #050505;
+}
+
+/* Ensure the canvas fills the container */
+.background-3d-container > div,
+.background-3d-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+  outline: none;
+}
