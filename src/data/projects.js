@@ -32,7 +32,7 @@ export const projects = [
       { step: 4, title: 'Support Tickets', description: 'Open the Tickets module. View the kanban board, create a new ticket, drag tickets between columns, and see resolution workflows in action.' },
       { step: 5, title: 'Performance & Reports', description: 'Visit Performance tracking to view marks, trends, and exportable reports. The system auto-calculates metrics across all tracked parameters.' }
     ],
-    demoCredentials: { email: 'admin@demo.com', password: 'Password123!', url: '' },
+    demoCredentials: { email: 'admin@demo.com', password: 'Password123!', url: 'https://chalkzone-xi.vercel.app' },
     metrics: { timeSaved: '50+ hrs/month', costReduction: '40%', efficiency: '4x faster' }
   },
   {
