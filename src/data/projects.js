@@ -32,7 +32,7 @@ export const projects = [
       { step: 4, title: 'Support Tickets', description: 'Open the Tickets module. View the kanban board, create a new ticket, drag tickets between columns, and see resolution workflows in action.' },
       { step: 5, title: 'Performance & Reports', description: 'Visit Performance tracking to view marks, trends, and exportable reports. The system auto-calculates metrics across all tracked parameters.' }
     ],
-    demoCredentials: { email: 'demo@manasarora.dev', password: 'Demo@2024', url: 'https://chalkzone-xi.vercel.app' },
+    demoCredentials: { email: 'demo@manasarora.dev', password: 'Demo@2024', url: '' },
     metrics: { timeSaved: '50+ hrs/month', costReduction: '40%', efficiency: '4x faster' }
   },
   {
@@ -152,7 +152,7 @@ export const projects = [
       { step: 4, title: 'Collect Responses', description: 'Share the link. Responses stream in real-time to your dashboard. View individual submissions or aggregate analytics.' },
       { step: 5, title: 'Export Data', description: 'Click Export to download all responses as a formatted Excel file. Optionally push data to Google Sheets via webhook.' }
     ],
-    demoCredentials: { email: 'demo@manasarora.dev', password: 'Demo@2024', url: 'https://simply-form.vercel.app/' },
+    demoCredentials: { email: 'demo@manasarora.dev', password: 'Demo@2024', url: '' },
     metrics: { timeSaved: '80% faster creation', costReduction: '100% free', efficiency: '5x faster' }
   },
   {
@@ -182,7 +182,7 @@ export const projects = [
       { step: 4, title: 'AI Enhancement', description: 'Select any bullet point and click the AI button. Gemini rewrites it for maximum impact and clarity.' },
       { step: 5, title: 'Export', description: 'Click Export to download as a pixel-perfect PDF or editable DOCX. The dynamic font-scaler ensures everything fits on one page.' }
     ],
-    demoCredentials: { email: 'Sign in with Google (SSO)', password: 'Not required', url: 'https://resume-builder-opal-eight.vercel.app/' },
+    demoCredentials: { email: 'Sign in with Google (SSO)', password: 'Not required', url: '' },
     metrics: { timeSaved: '90% faster', costReduction: '100% free', efficiency: '5x match rate' }
   },
   {
