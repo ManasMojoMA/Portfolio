@@ -182,7 +182,7 @@ export const projects = [
       { step: 4, title: 'AI Enhancement', description: 'Select any bullet point and click the AI button. Gemini rewrites it for maximum impact and clarity.' },
       { step: 5, title: 'Export', description: 'Click Export to download as a pixel-perfect PDF or editable DOCX. The dynamic font-scaler ensures everything fits on one page.' }
     ],
-    demoCredentials: { email: 'demo@manasarora.dev', password: 'Demo@2024', url: 'https://resume-builder-opal-eight.vercel.app/' },
+    demoCredentials: { email: 'Sign in with Google (SSO)', password: 'Not required', url: 'https://resume-builder-opal-eight.vercel.app/' },
     metrics: { timeSaved: '90% faster', costReduction: '100% free', efficiency: '5x match rate' }
   },
   {
