@@ -152,7 +152,7 @@ export const projects = [
       { step: 4, title: 'Collect Responses', description: 'Share the link. Responses stream in real-time to your dashboard. View individual submissions or aggregate analytics.' },
       { step: 5, title: 'Export Data', description: 'Click Export to download all responses as a formatted Excel file. Optionally push data to Google Sheets via webhook.' }
     ],
-    demoCredentials: { email: 'demo@manasarora.dev', password: 'Demo@2024', url: '' },
+    demoCredentials: { email: 'demo@manasarora.dev', password: 'Demo@2024', url: 'https://simply-form.vercel.app/' },
     metrics: { timeSaved: '80% faster creation', costReduction: '100% free', efficiency: '5x faster' }
   },
   {
