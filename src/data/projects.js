@@ -32,7 +32,7 @@ export const projects = [
       { step: 4, title: 'Support Tickets', description: 'Open the Tickets module. View the kanban board, create a new ticket, drag tickets between columns, and see resolution workflows in action.' },
       { step: 5, title: 'Performance & Reports', description: 'Visit Performance tracking to view marks, trends, and exportable reports. The system auto-calculates metrics across all tracked parameters.' }
     ],
-    demoCredentials: { email: 'admin@demo.com', password: 'Password123!', url: 'https://chalkzone-xi.vercel.app' },
+    demoCredentials: { email: 'demo@manasarora.dev', password: 'Demo@2024', url: 'https://chalkzone-xi.vercel.app' },
     metrics: { timeSaved: '50+ hrs/month', costReduction: '40%', efficiency: '4x faster' }
   },
   {
@@ -62,7 +62,7 @@ export const projects = [
       { step: 4, title: 'Eligibility Engine', description: 'Set eligibility criteria (min CGPA, branch, batch, skills). The system shows a live count of eligible candidates before publishing.' },
       { step: 5, title: 'Export & Notify', description: 'Export applicant lists to Excel or Google Drive. Push notifications and digest emails are sent automatically to eligible candidates.' }
     ],
-    demoCredentials: { email: 'admin@demo.com', password: 'Demo@2024', url: '' },
+    demoCredentials: { email: 'demo@manasarora.dev', password: 'Demo@2024', url: '' },
     metrics: { timeSaved: '30+ hrs/week', costReduction: '60%', efficiency: '5x faster' }
   },
   {
@@ -92,7 +92,7 @@ export const projects = [
       { step: 4, title: 'Evaluator Scoring', description: 'Evaluators access dynamic grading panels, score each category based on rubrics, save drafts, and finalize when ready.' },
       { step: 5, title: 'Dean Moderation', description: 'Deans review all finalized evaluations in a unified view, export comprehensive reports in CSV/XLSX format.' }
     ],
-    demoCredentials: { email: 'admin@demo.com', password: 'Demo@2024', url: '' },
+    demoCredentials: { email: 'demo@manasarora.dev', password: 'Demo@2024', url: '' },
     metrics: { timeSaved: '60+ hrs/cycle', costReduction: '50%', efficiency: '4x faster' }
   },
   {
@@ -122,7 +122,7 @@ export const projects = [
       { step: 4, title: 'Final Submission', description: 'Students submit their final internship report (up to 3 attempts). Faculty evaluate with marks (0-100) and detailed feedback.' },
       { step: 5, title: 'Certificate Generation', description: 'After faculty sign-off, the system auto-generates internship certificates in PDF format with all relevant details.' }
     ],
-    demoCredentials: { email: 'admin@demo.com', password: 'Demo@2024', url: '' },
+    demoCredentials: { email: 'demo@manasarora.dev', password: 'Demo@2024', url: '' },
     metrics: { timeSaved: '25+ hrs/month', costReduction: '35%', efficiency: '3x faster' }
   },
   {
@@ -212,7 +212,7 @@ export const projects = [
       { step: 4, title: 'Cognitive Analysis', description: 'Every 30 minutes (after 10-min warmup), the cognitive agent runs a reasoning cycle — analyzing patterns and adapting strategy.' },
       { step: 5, title: 'Review Journal', description: 'Access the signal journal to review past signals, their accuracy, and use replay mode to backtest historical data.' }
     ],
-    demoCredentials: { email: 'trader@demo.com', password: 'Demo@2024', url: '' },
+    demoCredentials: { email: 'demo@manasarora.dev', password: 'Demo@2024', url: '' },
     metrics: { accuracy: '82%+ threshold', latency: '<100ms', analysis: '3 timeframes' }
   },
   {
@@ -242,7 +242,7 @@ export const projects = [
       { step: 4, title: 'Geofence Verification', description: 'If enabled, the system checks the student\'s GPS location against the admin\'s position to verify physical presence.' },
       { step: 5, title: 'Export Report', description: 'Admin exports attendance data to XLSX with status tracking (Present, Absent, N/A) for all sessions.' }
     ],
-    demoCredentials: { email: 'admin@demo.com', password: 'Demo@2024', url: '' },
+    demoCredentials: { email: 'demo@manasarora.dev', password: 'Demo@2024', url: '' },
     metrics: { timeSaved: '95% faster', accuracy: '100% verified', scalability: '500+ users' }
   }
 ];
