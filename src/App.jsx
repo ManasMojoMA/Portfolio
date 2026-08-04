@@ -9,7 +9,7 @@ const Hero = lazy(() => import('./components/Hero'))
 const About = lazy(() => import('./components/About'))
 const Services = lazy(() => import('./components/Services'))
 const Projects = lazy(() => import('./components/Projects'))
-const Testimonials = lazy(() => import('./components/Testimonials'))
+const Proof = lazy(() => import('./components/Proof'))
 const Contact = lazy(() => import('./components/Contact'))
 const Footer = lazy(() => import('./components/Footer'))
 
@@ -170,7 +170,7 @@ function App() {
 
             <Suspense fallback={<SectionFallback />}>
               <Section3D>
-                <Testimonials />
+                <Proof />
               </Section3D>
             </Suspense>
 

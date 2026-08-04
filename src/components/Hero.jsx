@@ -4,12 +4,10 @@ import { useInView } from 'react-intersection-observer';
 import { stats as importedStats } from '../data/projects';
 import './Hero.css';
 
-const defaultStats = [
-  { value: 8, suffix: '+', label: 'Products Built' },
-  { value: 40, suffix: '%', label: 'Cost Reduction' },
-  { value: 5, suffix: 'x', label: 'Efficiency' },
-  { value: 100, suffix: '%', label: 'Satisfaction' },
-];
+// No hardcoded fallback here on purpose. This used to hold invented numbers
+// ("40% Cost Reduction", "100% Satisfaction") that would render the moment
+// `stats` came back empty. Every number shown must be checkable by a visitor,
+// so an empty `stats` array now renders no strip at all rather than a lie.
 
 const AnimatedNumber = ({ value, inView }) => {
   const nodeRef = useRef(null);
@@ -47,7 +45,7 @@ const Hero = () => {
     threshold: 0.1,
   });
 
-  const displayStats = Array.isArray(importedStats) && importedStats.length > 0 ? importedStats : defaultStats;
+  const displayStats = Array.isArray(importedStats) ? importedStats : [];
 
   const titleVariants = {
     hidden: { opacity: 0 },
@@ -133,26 +131,29 @@ const Hero = () => {
         </motion.div>
       </motion.div>
 
-      {/* Floating Stats Bar */}
-      <motion.div 
-        className="hero-stats-container"
-        ref={statsRef}
-        initial={{ opacity: 0, y: 50 }}
-        animate={statsInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <div className="hero-stats">
-          {displayStats.map((stat, index) => (
-            <div className="stat-item" key={index}>
-              <h3 className="stat-value">
-                <AnimatedNumber value={stat.value} inView={statsInView} />
-                <span className="stat-suffix">{stat.suffix}</span>
-              </h3>
-              <p className="stat-label">{stat.label}</p>
-            </div>
-          ))}
-        </div>
-      </motion.div>
+      {/* Floating Stats Bar — omitted entirely when there is nothing verifiable
+          to show, rather than rendering an empty bordered shell. */}
+      {displayStats.length > 0 && (
+        <motion.div
+          className="hero-stats-container"
+          ref={statsRef}
+          initial={{ opacity: 0, y: 50 }}
+          animate={statsInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <div className="hero-stats">
+            {displayStats.map((stat, index) => (
+              <div className="stat-item" key={index}>
+                <h3 className="stat-value">
+                  <AnimatedNumber value={stat.value} inView={statsInView} />
+                  <span className="stat-suffix">{stat.suffix}</span>
+                </h3>
+                <p className="stat-label">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      )}
 
       {/* Scroll Indicator */}
       <motion.div 

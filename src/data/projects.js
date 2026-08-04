@@ -282,30 +282,44 @@ export const services = [
   }
 ];
 
+// Every number here must be independently checkable by a visitor.
+// No satisfaction percentages, no cost-reduction averages, no client counts —
+// those cannot be verified and a skeptic who catches one stops believing all of them.
 export const stats = [
-  { value: 8, suffix: '+', label: 'Products Built' },
-  { value: 40, suffix: '%', label: 'Avg Cost Reduction' },
-  { value: 5, suffix: 'x', label: 'Efficiency Gains' },
-  { value: 100, suffix: '%', label: 'Client Satisfaction' }
+  { value: 8, suffix: '+', label: 'Products Shipped' },
+  { value: 3, suffix: '', label: 'Live Demos You Can Try' },
+  { value: 6, suffix: '', label: 'Garage Automations Mapped' },
+  { value: 1, suffix: '', label: 'Free Automation to Start' }
 ];
 
-export const testimonials = [
+// Real testimonials go here once clients give them, with permission and full
+// attribution — name, business, city. Until then this stays empty and the
+// Proof section shows verifiable evidence instead.
+// Do not populate this with illustrative or placeholder quotes.
+export const testimonials = [];
+
+// Industry playbooks. Only list one here when its page actually exists —
+// a grid of "coming soon" tiles reads as vapour to the exact buyer we want.
+export const playbooks = [
   {
-    quote: 'Manas transformed our manual HR processes into a fully automated system. What used to take weeks now takes hours.',
-    author: 'Operations Manager',
-    role: 'Enterprise Client',
-    avatar: '👤'
-  },
-  {
-    quote: 'The AI-powered form builder saved us countless hours. Our team can now create complex forms in minutes instead of days.',
-    author: 'Product Lead',
-    role: 'Tech Startup',
-    avatar: '👤'
-  },
-  {
-    quote: 'The placement automation engine completely eliminated our manual email workflows. 5x faster, zero errors.',
-    author: 'Director of Operations',
-    role: 'Growing Organization',
-    avatar: '👤'
+    id: 'tyre-garage',
+    href: '/playbooks/tyre-garage',
+    industry: 'Tyre Shop, Retreading & Auto Repair',
+    headline: 'Your garage already has the money. It just walks out and never comes back.',
+    summary:
+      'Six automations for a tyre and repair garage — recall reminders, digital job cards, retread casing tracking, live stock by size, udhaar ledger and a daily closing summary.',
+    icon: '🛞',
+    status: 'published'
   }
+];
+
+// Industries the same automation patterns transfer to. Named honestly as
+// "transfers to", not as clients or case studies.
+export const playbookRoadmap = [
+  'Dental & medical clinics',
+  'Salons & spas',
+  'Physiotherapy & wellness',
+  'AC & appliance servicing',
+  'Coaching centres',
+  'Small manufacturing units'
 ];
