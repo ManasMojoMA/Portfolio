@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Personal documents kept in this folder for convenience — not part of the site
+*Resume*.pdf
+*Resume*.docx
+*Resume*.md
+Manas_Arora_Resume.*

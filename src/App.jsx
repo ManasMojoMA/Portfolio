@@ -8,6 +8,7 @@ import Navbar from './components/Navbar'
 const Hero = lazy(() => import('./components/Hero'))
 const About = lazy(() => import('./components/About'))
 const Services = lazy(() => import('./components/Services'))
+const Playbooks = lazy(() => import('./components/Playbooks'))
 const Projects = lazy(() => import('./components/Projects'))
 const Proof = lazy(() => import('./components/Proof'))
 const Contact = lazy(() => import('./components/Contact'))
@@ -159,6 +160,15 @@ function App() {
             <Suspense fallback={<SectionFallback />}>
               <Section3D>
                 <Services />
+              </Section3D>
+            </Suspense>
+
+            {/* Business-owner path comes before the engineering deep-dive:
+                an owner should reach their playbook without scrolling past
+                eight enterprise case studies first. */}
+            <Suspense fallback={<SectionFallback />}>
+              <Section3D>
+                <Playbooks />
               </Section3D>
             </Suspense>
 

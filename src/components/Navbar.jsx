@@ -2,11 +2,14 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import './Navbar.css'
 
+// Five items, ordered so a business owner hits "For Your Business" before the
+// engineering work, and a recruiter still reaches "Work" in one click.
+// About is reachable by scrolling; keeping it out of the bar keeps mobile short.
 const navLinks = [
   { name: 'Home', id: 'home' },
-  { name: 'About', id: 'about' },
   { name: 'Services', id: 'services' },
-  { name: 'Projects', id: 'projects' },
+  { name: 'For Your Business', id: 'playbooks' },
+  { name: 'Work', id: 'projects' },
   { name: 'Contact', id: 'contact' }
 ]
 
