@@ -1,6 +1,7 @@
 import { StrictMode, lazy, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { useRouteMeta } from './hooks/useRouteMeta.js'
 import './index.css'
 
 // Both halves of the site are lazy so neither pays for the other. The
@@ -10,16 +11,25 @@ import './index.css'
 const App = lazy(() => import('./App.jsx'))
 const PlaybookTyreGarage = lazy(() => import('./pages/PlaybookTyreGarage.jsx'))
 
+// Must live inside BrowserRouter to read the current location.
+function AppRoutes() {
+  useRouteMeta()
+
+  return (
+    <Suspense fallback={null}>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/playbooks/tyre-garage" element={<PlaybookTyreGarage />} />
+        <Route path="*" element={<App />} />
+      </Routes>
+    </Suspense>
+  )
+}
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-      <Suspense fallback={null}>
-        <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="/playbooks/tyre-garage" element={<PlaybookTyreGarage />} />
-          <Route path="*" element={<App />} />
-        </Routes>
-      </Suspense>
+      <AppRoutes />
     </BrowserRouter>
   </StrictMode>,
 )

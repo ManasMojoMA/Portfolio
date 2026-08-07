@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, lazy, Suspense, useRef } from 'react'
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
+import { useHeavyVisualsAllowed } from './hooks/useHeavyVisualsAllowed'
 import './App.css'
 
 // Lazy load components for performance
@@ -110,6 +111,10 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false)
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
 
+  // Phones, reduced-motion users and slow connections never download the 3D scene.
+  // It is the single largest asset on the site and it is decoration.
+  const showBackground3D = useHeavyVisualsAllowed()
+
   const handleMouseMove = useCallback((e) => {
     setMousePos({ x: e.clientX, y: e.clientY })
   }, [])
@@ -137,10 +142,12 @@ function App() {
             aria-hidden="true"
           />
 
-          {/* 3D Background */}
-          <Suspense fallback={null}>
-            <Background3D />
-          </Suspense>
+          {/* 3D Background — desktop, fast connections, motion-tolerant only */}
+          {showBackground3D && (
+            <Suspense fallback={null}>
+              <Background3D />
+            </Suspense>
+          )}
 
           {/* Navigation */}
           <Navbar />
