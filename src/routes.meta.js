@@ -21,10 +21,13 @@ export const SITE_URL = (process.env?.SITE_URL || 'https://portfolio-ai-manas.ve
   ''
 );
 
-// Optional social card image. Must be an absolute URL to a PNG or JPG, ideally
-// 1200x630. Left null on purpose — a broken og:image renders a worse card than no
-// og:image at all. Drop a file in public/ and set this to enable it.
-export const OG_IMAGE = null;
+// Social card images live in public/ and are referenced per route below as a
+// root-relative path. The build resolves them to absolute URLs (required by every
+// platform) and FAILS if the file is missing — a dead og:image renders a worse card
+// than no og:image at all, and it fails silently otherwise.
+//
+// Source templates are in og/og-cards.html; open it in Chrome and follow the
+// instructions to export at exactly 1200x630.
 
 export const routes = [
   {
@@ -35,6 +38,9 @@ export const routes = [
     ogTitle: 'Simplymation — automation for small businesses',
     ogDescription:
       'Practical AI and automation for businesses that were told it was not for them. See a real playbook for your industry.',
+    // Uncomment once public/og-home.png exists — export it from og/og-cards.html.
+    // The build fails if this points at a missing file, by design.
+    // ogImage: '/og-home.png',
     changefreq: 'monthly',
     priority: '1.0',
   },
@@ -48,6 +54,8 @@ export const routes = [
     ogTitle: 'Your garage already has the money. It just walks out and never comes back.',
     ogDescription:
       'Alignment is due every six months. Tyres every three years. Your customer forgot the day they drove out — and nobody calls them. Six automations for a tyre shop, free to start.',
+    // Uncomment once public/og-tyre-garage.png exists — export it from og/og-cards.html.
+    // ogImage: '/og-tyre-garage.png',
     changefreq: 'monthly',
     priority: '0.9',
   },

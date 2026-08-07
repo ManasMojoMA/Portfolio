@@ -12,14 +12,14 @@
 // these files win for their exact paths and everything else still falls through.
 // ============================================
 
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(root, 'dist');
 
-const { routes, SITE_URL, OG_IMAGE } = await import('../src/routes.meta.js');
+const { routes, SITE_URL } = await import('../src/routes.meta.js');
 
 /** Escape for use inside a double-quoted HTML attribute. */
 const attr = (s) =>
@@ -36,6 +36,7 @@ function buildHead(route) {
   // equivalent, but a canonical that disagrees with the sitemap is a needless signal
   // to reconcile.
   const url = `${SITE_URL}${route.path === '/' ? '/' : route.path}`;
+  const image = route.ogImage ? `${SITE_URL}${route.ogImage}` : null;
   const tags = [
     `<title>${escapeHtml(route.title)}</title>`,
     `<meta name="description" content="${attr(route.description)}" />`,
@@ -49,17 +50,20 @@ function buildHead(route) {
 
     // summary_large_image needs an image to be worth anything; without one, the
     // plain summary card renders better.
-    `<meta name="twitter:card" content="${OG_IMAGE ? 'summary_large_image' : 'summary'}" />`,
+    `<meta name="twitter:card" content="${image ? 'summary_large_image' : 'summary'}" />`,
     `<meta name="twitter:title" content="${attr(route.ogTitle ?? route.title)}" />`,
     `<meta name="twitter:description" content="${attr(route.ogDescription ?? route.description)}" />`,
   ];
 
-  if (OG_IMAGE) {
+  if (image) {
     tags.push(
-      `<meta property="og:image" content="${attr(OG_IMAGE)}" />`,
+      `<meta property="og:image" content="${attr(image)}" />`,
+      `<meta property="og:image:type" content="image/png" />`,
       `<meta property="og:image:width" content="1200" />`,
       `<meta property="og:image:height" content="630" />`,
-      `<meta name="twitter:image" content="${attr(OG_IMAGE)}" />`
+      // Read aloud by screen readers on some platforms, and shown if the image fails.
+      `<meta property="og:image:alt" content="${attr(route.ogTitle ?? route.title)}" />`,
+      `<meta name="twitter:image" content="${attr(image)}" />`
     );
   }
 
@@ -106,6 +110,31 @@ function buildSitemap() {
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
 }
 
+// A declared-but-missing og:image is worse than none: platforms show a broken or
+// blank card and there is no error anywhere to notice. Vite has already copied
+// public/ into dist/, so check the built output rather than the source.
+const missingImages = [];
+for (const route of routes) {
+  if (!route.ogImage) continue;
+  try {
+    await access(join(dist, route.ogImage));
+  } catch {
+    missingImages.push({ path: route.path, image: route.ogImage });
+  }
+}
+
+if (missingImages.length > 0) {
+  console.error('\n✗ Routes declare an og:image that does not exist in public/:\n');
+  for (const m of missingImages) {
+    console.error(`    ${m.path}  →  public${m.image}`);
+  }
+  console.error(
+    '\n  Export them from og/og-cards.html (open in Chrome, see instructions at top),' +
+      '\n  or remove `ogImage` from that route in src/routes.meta.js.\n'
+  );
+  process.exit(1);
+}
+
 const shell = await readFile(join(dist, 'index.html'), 'utf8');
 
 for (const route of routes) {
@@ -123,7 +152,11 @@ for (const route of routes) {
 
 await writeFile(join(dist, 'sitemap.xml'), buildSitemap(), 'utf8');
 console.log('  sitemap.xml');
-console.log(`  site url: ${SITE_URL}${OG_IMAGE ? '' : '  (no og:image set)'}`);
+const withImages = routes.filter((r) => r.ogImage).length;
+console.log(
+  `  site url: ${SITE_URL}` +
+    `  (og:image on ${withImages}/${routes.length} routes)`
+);
 
 // ---------------------------------------------------------------------------
 // vercel.json guard rails. Two separate failures this catches:
