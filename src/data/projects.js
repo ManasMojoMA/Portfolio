@@ -298,28 +298,5 @@ export const stats = [
 // Do not populate this with illustrative or placeholder quotes.
 export const testimonials = [];
 
-// Industry playbooks. Only list one here when its page actually exists —
-// a grid of "coming soon" tiles reads as vapour to the exact buyer we want.
-export const playbooks = [
-  {
-    id: 'tyre-garage',
-    href: '/playbooks/tyre-garage',
-    industry: 'Tyre Shop, Retreading & Auto Repair',
-    headline: 'Your garage already has the money. It just walks out and never comes back.',
-    summary:
-      'Six automations for a tyre and repair garage — recall reminders, digital job cards, retread casing tracking, live stock by size, udhaar ledger and a daily closing summary.',
-    icon: '🛞',
-    status: 'published'
-  }
-];
-
-// Industries the same automation patterns transfer to. Named honestly as
-// "transfers to", not as clients or case studies.
-export const playbookRoadmap = [
-  'Dental & medical clinics',
-  'Salons & spas',
-  'Physiotherapy & wellness',
-  'AC & appliance servicing',
-  'Coaching centres',
-  'Small manufacturing units'
-];
+// Playbook data moved to data/playbooks/registry.js so the buyer-facing pages do
+// not import this whole file just to list two industries.

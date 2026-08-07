@@ -172,3 +172,14 @@
 .mobile-nav-link:hover {
   color: rgba(255, 255, 255, 0.7);
 }
+
+/* Route link back to the Simplymation site. Styled as a nav link but tinted so it
+   reads as leaving this page rather than scrolling within it. */
+.nav-link-brand {
+  color: var(--color-accent-start);
+  font-weight: 600;
+}
+
+.nav-link-brand:hover {
+  color: var(--color-text-primary);
+}

@@ -11,6 +11,10 @@
 // useEffect is invisible to them — the link preview would show whatever is in the
 // single index.html, for every route. So the meta must exist in the served HTML.
 //
+// Adding a route here also requires a rewrite in vercel.json. The build fails if you
+// forget, because otherwise the page works for humans while crawlers silently get
+// the homepage's tags.
+//
 // Keep this file plain JS with no imports: the Node build script loads it directly.
 // ============================================
 
@@ -23,26 +27,35 @@ export const SITE_URL = (process.env?.SITE_URL || 'https://portfolio-ai-manas.ve
 
 // Social card images live in public/ and are referenced per route below as a
 // root-relative path. The build resolves them to absolute URLs (required by every
-// platform) and FAILS if the file is missing — a dead og:image renders a worse card
-// than no og:image at all, and it fails silently otherwise.
+// platform), reads real dimensions off the PNG, and FAILS if the file is missing —
+// a dead og:image renders a worse card than no og:image at all.
 //
-// Source templates are in og/og-cards.html; open it in Chrome and follow the
-// instructions to export at exactly 1200x630.
+// Source templates are in og/og-cards.html.
 
 export const routes = [
   {
     path: '/',
-    title: 'Manas Arora | AI & Automation for Small Businesses',
+    title: 'Simplymation | Automation for small businesses',
     description:
-      'I build AI and automation that removes the work a computer should be doing — for garages, clinics, salons and small businesses. First automation free.',
-    ogTitle: 'Simplymation — automation for small businesses',
+      "You're doing work a computer should be doing. Practical AI and automation for garages, clinics, salons and small businesses — the first one is free.",
+    ogTitle: "You're doing work a computer should be doing.",
     ogDescription:
-      'Practical AI and automation for businesses that were told it was not for them. See a real playbook for your industry.',
-    // Exported from og/og-cards.html. The build fails if the file is missing and
-    // reads real dimensions off the PNG, so re-exporting at any scale is safe.
+      'Practical AI and automation for small businesses that were told it was not for them. First automation free, built in your own Google account.',
     ogImage: '/og-home.png',
     changefreq: 'monthly',
     priority: '1.0',
+  },
+  {
+    path: '/playbooks',
+    title: 'Industry Playbooks | Simplymation',
+    description:
+      'What automation actually looks like in your trade — the specific work a computer should be doing, what it saves, and where the free version stops. No jargon.',
+    ogTitle: 'What automation actually looks like in your trade.',
+    ogDescription:
+      'Walkthroughs written for people who have never bought software before. Every number is either measured or labelled as an assumption you can change.',
+    ogImage: '/og-home.png',
+    changefreq: 'monthly',
+    priority: '0.9',
   },
   {
     path: '/playbooks/tyre-garage',
@@ -57,6 +70,18 @@ export const routes = [
     ogImage: '/og-tyre-garage.png',
     changefreq: 'monthly',
     priority: '0.9',
+  },
+  {
+    path: '/portfolio',
+    title: 'Manas Arora | Full-Stack & AI Engineering Portfolio',
+    description:
+      'Eight shipped products across ERP, HR tech, AI/RAG and workflow automation — Next.js, React, TypeScript, Supabase and Gemini. Three are live and clickable.',
+    ogTitle: 'Manas Arora — full-stack and AI engineering',
+    ogDescription:
+      'Eight shipped products across enterprise software, HR tech and AI. Three deployed and clickable right now.',
+    ogImage: '/og-home.png',
+    changefreq: 'monthly',
+    priority: '0.7',
   },
 ];
 

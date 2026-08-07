@@ -1,0 +1,141 @@
+.pbi-hero {
+  padding: var(--space-16) var(--space-5) var(--space-10);
+  max-width: var(--container-max);
+  margin-inline: auto;
+}
+
+.pbi-hero h1 {
+  font-size: clamp(2rem, 6vw, 3.4rem);
+  line-height: 1.12;
+  max-width: 18ch;
+  margin-bottom: var(--space-6);
+}
+
+.pbi-hero-sub {
+  font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+  color: var(--ink-soft);
+  max-width: 64ch;
+}
+
+/* ---------- Published playbooks ---------- */
+.pbi-list {
+  display: grid;
+  gap: var(--space-5);
+  margin-bottom: var(--space-16);
+}
+
+.pbi-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-5);
+  padding: var(--space-8);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(11, 99, 206, 0.28);
+  background: linear-gradient(180deg, var(--accent-soft), var(--surface) 55%);
+  transition: transform var(--duration-normal) var(--ease-out-expo),
+    border-color var(--duration-normal) var(--ease-out-expo),
+    box-shadow var(--duration-normal) var(--ease-out-expo);
+}
+
+.pbi-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(11, 99, 206, 0.5);
+  box-shadow: var(--shadow-sm);
+}
+
+.pbi-icon {
+  font-size: 2.4rem;
+  line-height: 1;
+}
+
+.pbi-industry {
+  display: block;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--space-3);
+}
+
+.pbi-card h2 {
+  font-size: clamp(1.3rem, 3vw, 1.9rem);
+  line-height: var(--leading-snug);
+  margin-bottom: var(--space-4);
+}
+
+.pbi-card p {
+  color: var(--ink-soft);
+  margin-bottom: var(--space-5);
+}
+
+.pbi-cta {
+  font-weight: 650;
+  color: var(--accent);
+}
+
+/* ---------- Roadmap ---------- */
+.pbi-next {
+  border-top: 1px solid var(--line);
+  padding-top: var(--space-10);
+}
+
+.pbi-next h2 {
+  font-size: var(--text-2xl);
+  margin-bottom: var(--space-3);
+}
+
+.pbi-next > p {
+  color: var(--ink-soft);
+  max-width: 62ch;
+  margin-bottom: var(--space-6);
+}
+
+.pbi-next ul {
+  list-style: none;
+  display: grid;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+.pbi-next li {
+  color: var(--ink-soft);
+  padding-left: var(--space-5);
+  position: relative;
+}
+
+.pbi-next li::before {
+  content: '·';
+  position: absolute;
+  left: var(--space-2);
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.pbi-next-note {
+  color: var(--ink-muted);
+  font-size: var(--text-sm);
+  max-width: 62ch;
+}
+
+@media (min-width: 700px) {
+  .pbi-hero {
+    padding-inline: var(--space-10);
+  }
+
+  .pbi-next ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1000px) {
+  .pbi-next ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pbi-card:hover {
+    transform: none;
+  }
+}

@@ -1,19 +1,19 @@
 import { useState, useEffect, useCallback, lazy, Suspense, useRef } from 'react'
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
-import { useHeavyVisualsAllowed } from './hooks/useHeavyVisualsAllowed'
-import './App.css'
+import { useHeavyVisualsAllowed } from '../hooks/useHeavyVisualsAllowed'
+import '../App.css'
 
 // Lazy load components for performance
-const Background3D = lazy(() => import('./components/Background3D'))
-import Navbar from './components/Navbar'
-const Hero = lazy(() => import('./components/Hero'))
-const About = lazy(() => import('./components/About'))
-const Services = lazy(() => import('./components/Services'))
-const Playbooks = lazy(() => import('./components/Playbooks'))
-const Projects = lazy(() => import('./components/Projects'))
-const Proof = lazy(() => import('./components/Proof'))
-const Contact = lazy(() => import('./components/Contact'))
-const Footer = lazy(() => import('./components/Footer'))
+const Background3D = lazy(() => import('../components/Background3D'))
+import Navbar from '../components/Navbar'
+const Hero = lazy(() => import('../components/Hero'))
+const About = lazy(() => import('../components/About'))
+const Services = lazy(() => import('../components/Services'))
+const Playbooks = lazy(() => import('../components/Playbooks'))
+const Projects = lazy(() => import('../components/Projects'))
+const Proof = lazy(() => import('../components/Proof'))
+const Contact = lazy(() => import('../components/Contact'))
+const Footer = lazy(() => import('../components/Footer'))
 
 // Loading Screen Component
 function LoadingScreen({ onComplete }) {
@@ -107,7 +107,7 @@ function Section3D({ children }) {
   )
 }
 
-function App() {
+function Portfolio() {
   const [isLoaded, setIsLoaded] = useState(false)
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
 
@@ -207,4 +207,4 @@ function App() {
   )
 }
 
-export default App
+export default Portfolio

@@ -1,115 +1,22 @@
 /* ============================================
-   SIMPLYMATION — INDUSTRY PLAYBOOK
-   Light, fast, mobile-first.
+   SIMPLYMATION — TYRE GARAGE PLAYBOOK
 
-   Deliberately NOT the dark portfolio theme. This page is read by a
-   garage owner on a mid-range phone, often outdoors. A light background
-   stays legible in sunlight, and a plain page reads "affordable" where
-   the dark 3D site reads "expensive agency".
-   Spacing / radius / easing tokens are inherited from index.css so the
-   two halves of the site still feel related.
+   Page-specific styles only. The light theme, tokens, fixed-nav offset,
+   buttons and CTA band all come from styles/site.css, which this page
+   shares with / and /playbooks. Navigation and footer are the shared
+   SiteNav / SiteFooter components.
    ============================================ */
-
-body.pb-light {
-  background-color: #ffffff;
-}
-
-.pb {
-  /* Height of the fixed bar. Content below is offset by this. */
-  --pb-nav-h: 72px;
-
-  --ink: #16181d;
-  --ink-soft: #4a515e;
-  --ink-muted: #757d8c;
-  --line: #e4e7ec;
-  --surface: #ffffff;
-  --surface-tint: #f6f7f9;
-  --accent: #0b63ce;
-  --accent-soft: #e8f1fd;
-  --money: #0f7b4f;
-  --money-soft: #e6f4ed;
-  --warn: #9a5b00;
-  --warn-soft: #fdf3e2;
-
-  background: var(--surface);
-  color: var(--ink);
-  font-size: 17px;
-  line-height: 1.6;
-  min-height: 100vh;
-}
-
-/* The bar is `fixed`, not `sticky`: both `body` (index.css) and any
-   overflow-hidden ancestor turn into scroll containers, which silently
-   breaks `position: sticky`. Fixed is immune to that. */
-.pb main {
-  padding-top: var(--pb-nav-h);
-}
-
-/* Stop in-page anchors from landing underneath the fixed bar. */
-.pb [id] {
-  scroll-margin-top: calc(var(--pb-nav-h) + var(--space-4));
-}
-
-.pb h1,
-.pb h2,
-.pb h3 {
-  letter-spacing: -0.02em;
-}
-
-/* ---------- Nav ---------- */
-.pb-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  min-height: var(--pb-nav-h);
-  z-index: var(--z-nav);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-4);
-  padding: var(--space-3) var(--space-5);
-  background: rgba(255, 255, 255, 0.92);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--line);
-}
-
-.pb-brand {
-  font-weight: 800;
-  font-size: var(--text-lg);
-  letter-spacing: -0.03em;
-  color: var(--ink);
-}
-
-.pb-brand span {
-  background: var(--gradient-accent);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.pb-nav-cta {
-  font-size: var(--text-sm);
-  font-weight: 600;
-  padding: var(--space-2) var(--space-4);
-  border-radius: var(--radius-full);
-  background: var(--ink);
-  color: #fff;
-}
 
 /* ---------- Shared layout ---------- */
 .pb-hero,
 .pb-section,
-.pb-cta,
-.pb-footer {
+.pb-cta {
   padding: var(--space-16) var(--space-5);
 }
 
 .pb-hero > *,
 .pb-section > *,
-.pb-cta > *,
-.pb-footer > * {
+.pb-cta > * {
   max-width: var(--container-max);
   margin-inline: auto;
 }
@@ -705,28 +612,13 @@ body.pb-light {
   border-color: rgba(255, 255, 255, 0.28);
 }
 
-/* ---------- Footer ---------- */
-.pb-footer {
-  padding-block: var(--space-10);
-  border-top: 1px solid var(--line);
-  font-size: var(--text-sm);
-  color: var(--ink-soft);
-  display: grid;
-  gap: var(--space-2);
-}
-
-.pb-footer-alt a {
-  color: var(--accent);
-  font-weight: 600;
-  text-decoration: underline;
-}
+/* Footer and nav styles now live in SiteFooter.css / SiteNav.css. */
 
 /* ---------- Larger screens ---------- */
 @media (min-width: 700px) {
   .pb-hero,
   .pb-section,
-  .pb-cta,
-  .pb-footer {
+  .pb-cta {
     padding-inline: var(--space-10);
   }
 
@@ -758,8 +650,7 @@ body.pb-light {
 @media (min-width: 1000px) {
   .pb-hero,
   .pb-section,
-  .pb-cta,
-  .pb-footer {
+  .pb-cta {
     padding-block: var(--space-24);
   }
 
@@ -770,11 +661,6 @@ body.pb-light {
   .pb-calc {
     grid-template-columns: 1fr 1fr;
     align-items: start;
-  }
-
-  .pb-footer {
-    grid-template-columns: 1fr auto;
-    align-items: center;
   }
 }
 

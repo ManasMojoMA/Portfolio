@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { useInView } from 'react-intersection-observer'
-import { playbooks, playbookRoadmap } from '../data/projects'
+import { playbooks, playbookRoadmap } from '../data/playbooks/registry'
 import './Playbooks.css'
 
 // The bridge between the two audiences. A business owner lands here and leaves

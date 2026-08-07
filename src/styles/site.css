@@ -1,0 +1,201 @@
+/* ============================================
+   SIMPLYMATION — shared buyer-facing design system
+
+   Used by /, /playbooks and every playbook page. Deliberately NOT the dark
+   3D theme, which now lives only at /portfolio for recruiters.
+
+   Why light: this half of the site is read by a business owner on a mid-range
+   phone, often outdoors. A light page stays legible in sunlight, loads faster
+   without a WebGL canvas, and reads "affordable" where the dark 3D site reads
+   "expensive agency".
+
+   Spacing, radius and easing tokens are inherited from index.css so the two
+   halves still feel related.
+   ============================================ */
+
+body.site-light {
+  background-color: #ffffff;
+}
+
+.site {
+  --nav-h: 68px;
+
+  --ink: #16181d;
+  --ink-soft: #4a515e;
+  --ink-muted: #757d8c;
+  --line: #e4e7ec;
+  --surface: #ffffff;
+  --surface-tint: #f6f7f9;
+  --accent: #0b63ce;
+  --accent-soft: #e8f1fd;
+  --money: #0f7b4f;
+  --money-soft: #e6f4ed;
+  --warn: #9a5b00;
+  --warn-soft: #fdf3e2;
+
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 17px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+.site h1,
+.site h2,
+.site h3 {
+  letter-spacing: -0.02em;
+}
+
+.site main {
+  padding-top: var(--nav-h);
+}
+
+/* Stop in-page anchors landing under the fixed bar. */
+.site [id] {
+  scroll-margin-top: calc(var(--nav-h) + var(--space-4));
+}
+
+/* ---------- Layout primitives ---------- */
+.site-section {
+  padding: var(--space-16) var(--space-5);
+}
+
+.site-section > * {
+  max-width: var(--container-max);
+  margin-inline: auto;
+}
+
+.site-section-tint {
+  background: var(--surface-tint);
+  border-block: 1px solid var(--line);
+}
+
+.site-section > h2 {
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  margin-bottom: var(--space-3);
+}
+
+.site-lede {
+  color: var(--ink-soft);
+  font-size: var(--text-lg);
+  max-width: 62ch;
+  margin-bottom: var(--space-10);
+}
+
+.site-eyebrow {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--space-5);
+}
+
+/* ---------- Buttons ---------- */
+.site-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4) var(--space-8);
+  border-radius: var(--radius-full);
+  font-weight: 650;
+  font-size: var(--text-base);
+  border: 1px solid transparent;
+  transition: transform var(--duration-fast) var(--ease-out-expo),
+    box-shadow var(--duration-fast) var(--ease-out-expo),
+    border-color var(--duration-fast) var(--ease-out-expo);
+}
+
+.site-btn-primary {
+  background: var(--gradient-accent);
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(41, 151, 255, 0.28);
+}
+
+.site-btn-ghost {
+  background: transparent;
+  border-color: var(--line);
+  color: var(--ink);
+}
+
+.site-btn:hover {
+  transform: translateY(-2px);
+}
+
+.site-btn-ghost:hover {
+  border-color: var(--ink-muted);
+}
+
+/* ---------- Cards ---------- */
+.site-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+}
+
+.site-card h3 {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-2);
+}
+
+.site-card p {
+  color: var(--ink-soft);
+  font-size: var(--text-base);
+}
+
+/* ---------- Dark CTA band ---------- */
+.site-cta {
+  background: var(--ink);
+  color: #fff;
+  text-align: center;
+  padding: var(--space-16) var(--space-5);
+}
+
+.site-cta > * {
+  max-width: var(--container-narrow);
+  margin-inline: auto;
+}
+
+.site-cta h2 {
+  font-size: clamp(1.6rem, 5vw, 2.6rem);
+  margin-bottom: var(--space-5);
+}
+
+.site-cta p {
+  color: rgba(255, 255, 255, 0.72);
+  margin-bottom: var(--space-8);
+}
+
+.site-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  justify-content: center;
+}
+
+.site-cta .site-btn-ghost {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+/* ---------- Larger screens ---------- */
+@media (min-width: 700px) {
+  .site-section,
+  .site-cta {
+    padding-inline: var(--space-10);
+  }
+}
+
+@media (min-width: 1000px) {
+  .site-section,
+  .site-cta {
+    padding-block: var(--space-24);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-btn:hover {
+    transform: none;
+  }
+}

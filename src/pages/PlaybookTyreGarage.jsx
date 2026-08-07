@@ -1,5 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import SiteNav from '../components/SiteNav';
+import SiteFooter from '../components/SiteFooter';
 import {
   meta,
   leaks,
@@ -11,6 +13,7 @@ import {
   trust,
   theTrick,
 } from '../data/playbooks/tyreGarage';
+import '../styles/site.css';
 import './PlaybookTyreGarage.css';
 
 // Deliberately no framer-motion and no 3D on this route.
@@ -122,20 +125,13 @@ export default function PlaybookTyreGarage() {
   // The global stylesheet paints body dark for the portfolio. This route is
   // light, so flip it while mounted or the dark shows through on overscroll.
   useEffect(() => {
-    document.body.classList.add('pb-light');
-    return () => document.body.classList.remove('pb-light');
+    document.body.classList.add('site-light');
+    return () => document.body.classList.remove('site-light');
   }, []);
 
   return (
-    <div className="pb">
-      <header className="pb-nav">
-        <Link to="/" className="pb-brand">
-          Simply<span>mation</span>
-        </Link>
-        <a href="#talk" className="pb-nav-cta">
-          Talk to me
-        </a>
-      </header>
+    <div className="site pb">
+      <SiteNav />
 
       <main>
         {/* ---------- Hero ---------- */}
@@ -340,15 +336,7 @@ export default function PlaybookTyreGarage() {
         </section>
       </main>
 
-      <footer className="pb-footer">
-        <p>
-          <strong>Simplymation</strong> — AI and automation for small businesses that were told
-          it was not for them.
-        </p>
-        <p className="pb-footer-alt">
-          Hiring rather than buying? <Link to="/">The engineering portfolio is here.</Link>
-        </p>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

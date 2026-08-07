@@ -4,12 +4,13 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { useRouteMeta } from './hooks/useRouteMeta.js'
 import './index.css'
 
-// Both halves of the site are lazy so neither pays for the other. The
-// recruiter-facing portfolio carries Three.js and framer-motion; the
-// buyer-facing playbooks must stay small enough to open instantly on a
-// mid-range phone over mobile data.
-const App = lazy(() => import('./App.jsx'))
+// Every route is lazy so the two halves of the site never pay for each other.
+// The buyer-facing pages (/, /playbooks, playbook pages) are light and small;
+// /portfolio alone carries Three.js and framer-motion for recruiters.
+const Home = lazy(() => import('./pages/Home.jsx'))
+const PlaybooksIndex = lazy(() => import('./pages/PlaybooksIndex.jsx'))
 const PlaybookTyreGarage = lazy(() => import('./pages/PlaybookTyreGarage.jsx'))
+const Portfolio = lazy(() => import('./pages/Portfolio.jsx'))
 
 // Must live inside BrowserRouter to read the current location.
 function AppRoutes() {
@@ -18,9 +19,12 @@ function AppRoutes() {
   return (
     <Suspense fallback={null}>
       <Routes>
-        <Route path="/" element={<App />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/playbooks" element={<PlaybooksIndex />} />
         <Route path="/playbooks/tyre-garage" element={<PlaybookTyreGarage />} />
-        <Route path="*" element={<App />} />
+        <Route path="/portfolio" element={<Portfolio />} />
+        {/* Unknown paths land on the buyer-facing home rather than a dead end. */}
+        <Route path="*" element={<Home />} />
       </Routes>
     </Suspense>
   )

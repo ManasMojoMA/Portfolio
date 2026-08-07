@@ -2,7 +2,9 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "rewrites": [
+    { "source": "/playbooks", "destination": "/playbooks/index.html" },
     { "source": "/playbooks/tyre-garage", "destination": "/playbooks/tyre-garage/index.html" },
+    { "source": "/portfolio", "destination": "/portfolio/index.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

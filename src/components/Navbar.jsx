@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import './Navbar.css'
 
@@ -84,8 +85,8 @@ export default function Navbar() {
           {/* Desktop Links */}
           <div className="navbar-links-desktop">
             {navLinks.map((link) => (
-              <button 
-                key={link.name} 
+              <button
+                key={link.name}
                 className="nav-link"
                 onClick={() => scrollToSection(link.id)}
               >
@@ -93,6 +94,11 @@ export default function Navbar() {
                 <span className="nav-link-indicator"></span>
               </button>
             ))}
+            {/* Without this, /portfolio is a dead end — nothing leads back to the
+                brand site a visitor may have arrived from. */}
+            <Link to="/" className="nav-link nav-link-brand">
+              Simplymation ↗
+            </Link>
           </div>
 
           {/* Mobile Hamburger Toggle */}
@@ -129,6 +135,11 @@ export default function Navbar() {
                   {link.name}
                 </motion.button>
               ))}
+              <motion.div variants={linkVariants}>
+                <Link to="/" className="mobile-nav-link" onClick={() => setIsOpen(false)}>
+                  Simplymation ↗
+                </Link>
+              </motion.div>
             </div>
           </motion.div>
         )}
