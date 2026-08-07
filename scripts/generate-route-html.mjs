@@ -19,6 +19,34 @@ import { fileURLToPath } from 'node:url';
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(root, 'dist');
 
+// ---------------------------------------------------------------------------
+// routes.meta.js is imported by BOTH this Node script and the browser. Anything
+// Node-only that leaks into it (`process`, `__dirname`, `require`) throws at module
+// evaluation in the browser and the whole app fails to mount — a blank white page
+// with no clue in the build output, because the build itself succeeds.
+//
+// So evaluate the module in a context with none of those bindings, which is exactly
+// what the browser gives it.
+// ---------------------------------------------------------------------------
+{
+  const { createContext, runInContext } = await import('node:vm');
+  const source = (await readFile(join(root, 'src/routes.meta.js'), 'utf8')).replace(
+    /^export /gm,
+    ''
+  );
+  try {
+    runInContext(source, createContext({}));
+  } catch (err) {
+    console.error('\n✗ src/routes.meta.js cannot run in a browser:\n');
+    console.error(`    ${err.message}`);
+    console.error(
+      '\n  It is imported by the app as well as this script, so it must not touch' +
+        '\n  Node-only globals. Guard them with `typeof process !== "undefined"`.\n'
+    );
+    process.exit(1);
+  }
+}
+
 const { routes, SITE_URL } = await import('../src/routes.meta.js');
 
 /** Escape for use inside a double-quoted HTML attribute. */

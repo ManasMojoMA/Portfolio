@@ -20,10 +20,16 @@
 
 // Absolute origin, needed for og:url, canonical and the sitemap.
 // Override at build time:  SITE_URL=https://simplymation.com npm run build
-export const SITE_URL = (process.env?.SITE_URL || 'https://portfolio-ai-manas.vercel.app').replace(
-  /\/$/,
-  ''
-);
+//
+// `typeof process` is deliberate. This module is imported by BOTH the Node build
+// script (where `process` exists) and the browser (where it does not). Writing
+// `process.env?.SITE_URL` throws ReferenceError in the browser — optional chaining
+// guards against a null value, not an undeclared identifier — which crashes the app
+// before React mounts. `typeof` on an undeclared name is the one safe way to ask.
+const envSiteUrl =
+  typeof process !== 'undefined' && process.env ? process.env.SITE_URL : undefined;
+
+export const SITE_URL = (envSiteUrl || 'https://portfolio-ai-manas.vercel.app').replace(/\/$/, '');
 
 // Social card images live in public/ and are referenced per route below as a
 // root-relative path. The build resolves them to absolute URLs (required by every
