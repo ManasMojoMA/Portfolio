@@ -38,9 +38,9 @@ export const routes = [
     ogTitle: 'Simplymation — automation for small businesses',
     ogDescription:
       'Practical AI and automation for businesses that were told it was not for them. See a real playbook for your industry.',
-    // Uncomment once public/og-home.png exists — export it from og/og-cards.html.
-    // The build fails if this points at a missing file, by design.
-    // ogImage: '/og-home.png',
+    // Exported from og/og-cards.html. The build fails if the file is missing and
+    // reads real dimensions off the PNG, so re-exporting at any scale is safe.
+    ogImage: '/og-home.png',
     changefreq: 'monthly',
     priority: '1.0',
   },
@@ -54,8 +54,7 @@ export const routes = [
     ogTitle: 'Your garage already has the money. It just walks out and never comes back.',
     ogDescription:
       'Alignment is due every six months. Tyres every three years. Your customer forgot the day they drove out — and nobody calls them. Six automations for a tyre shop, free to start.',
-    // Uncomment once public/og-tyre-garage.png exists — export it from og/og-cards.html.
-    // ogImage: '/og-tyre-garage.png',
+    ogImage: '/og-tyre-garage.png',
     changefreq: 'monthly',
     priority: '0.9',
   },

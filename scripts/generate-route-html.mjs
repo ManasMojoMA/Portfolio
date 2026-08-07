@@ -31,6 +31,27 @@ const attr = (s) =>
 
 const escapeHtml = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
+/**
+ * Read a PNG's real pixel dimensions from its IHDR header.
+ *
+ * Declared dimensions are read straight off the file rather than hardcoded, because
+ * a screenshot taken at browser zoom comes out scaled (a "1200x630" capture at 1.2x
+ * is really 1440x756). Ratio still renders fine, but advertising dimensions that do
+ * not match the file is the kind of small lie that makes a card lay out wrong on one
+ * platform and nowhere else.
+ *
+ * PNG layout: 8-byte signature, 4-byte chunk length, 4-byte "IHDR",
+ * then width and height as big-endian uint32 at offsets 16 and 20.
+ */
+async function readPngSize(absPath) {
+  const buf = await readFile(absPath);
+  if (buf.length < 24 || buf.toString('ascii', 12, 16) !== 'IHDR') return null;
+  return { width: buf.readUInt32BE(16), height: buf.readUInt32BE(20) };
+}
+
+/** Cache so each image is read once, not once per route. */
+const imageSizes = new Map();
+
 function buildHead(route) {
   // Trailing slash on root, matching the sitemap exactly. Google treats the two as
   // equivalent, but a canonical that disagrees with the sitemap is a needless signal
@@ -56,11 +77,18 @@ function buildHead(route) {
   ];
 
   if (image) {
+    const size = imageSizes.get(route.ogImage);
     tags.push(
       `<meta property="og:image" content="${attr(image)}" />`,
-      `<meta property="og:image:type" content="image/png" />`,
-      `<meta property="og:image:width" content="1200" />`,
-      `<meta property="og:image:height" content="630" />`,
+      `<meta property="og:image:type" content="image/png" />`
+    );
+    if (size) {
+      tags.push(
+        `<meta property="og:image:width" content="${size.width}" />`,
+        `<meta property="og:image:height" content="${size.height}" />`
+      );
+    }
+    tags.push(
       // Read aloud by screen readers on some platforms, and shown if the image fails.
       `<meta property="og:image:alt" content="${attr(route.ogTitle ?? route.title)}" />`,
       `<meta name="twitter:image" content="${attr(image)}" />`
@@ -115,9 +143,24 @@ function buildSitemap() {
 // public/ into dist/, so check the built output rather than the source.
 const missingImages = [];
 for (const route of routes) {
-  if (!route.ogImage) continue;
+  if (!route.ogImage || imageSizes.has(route.ogImage)) continue;
+  const abs = join(dist, route.ogImage);
   try {
-    await access(join(dist, route.ogImage));
+    await access(abs);
+    const size = await readPngSize(abs);
+    imageSizes.set(route.ogImage, size);
+
+    if (size) {
+      // 1.91:1 is what every major platform crops to. Drifting far from it means
+      // the card gets letterboxed or cropped through the headline.
+      const ratio = size.width / size.height;
+      if (Math.abs(ratio - 1.91) > 0.08) {
+        console.warn(
+          `  ⚠ ${route.ogImage} is ${size.width}x${size.height} (${ratio.toFixed(2)}:1)` +
+            ' — platforms crop to 1.91:1, so expect this to be trimmed.'
+        );
+      }
+    }
   } catch {
     missingImages.push({ path: route.path, image: route.ogImage });
   }
