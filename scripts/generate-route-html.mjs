@@ -125,25 +125,55 @@ await writeFile(join(dist, 'sitemap.xml'), buildSitemap(), 'utf8');
 console.log('  sitemap.xml');
 console.log(`  site url: ${SITE_URL}${OG_IMAGE ? '' : '  (no og:image set)'}`);
 
-// Guard rail: an extensionless URL like /playbooks/tyre-garage falls through to the
-// SPA catch-all unless vercel.json maps it explicitly. When that happens the page
-// still works for humans but every crawler sees index.html's meta — a silent failure
-// nobody notices until a shared link looks wrong. So verify it here.
+// ---------------------------------------------------------------------------
+// vercel.json guard rails. Two separate failures this catches:
+//
+// 1. A route without an explicit rewrite. An extensionless URL like
+//    /playbooks/tyre-garage falls through to the SPA catch-all, so the page still
+//    works for humans while every crawler sees index.html's meta — invisible until
+//    someone notices a shared link looks wrong.
+//
+// 2. An unknown property inside a rewrite. Vercel validates vercel.json strictly and
+//    FAILS THE DEPLOY. JSON has no comment syntax, so a "_comment" key looks
+//    harmless locally and breaks production. Checked here so it surfaces in seconds
+//    rather than after a push.
+// ---------------------------------------------------------------------------
+const REWRITE_KEYS = new Set(['source', 'destination', 'has', 'missing', 'statusCode']);
+
 try {
   const vercelConfig = JSON.parse(await readFile(join(root, 'vercel.json'), 'utf8'));
-  const sources = new Set((vercelConfig.rewrites ?? []).map((r) => r.source));
+  const rewrites = vercelConfig.rewrites ?? [];
+
+  const badKeys = [];
+  rewrites.forEach((rule, i) => {
+    for (const key of Object.keys(rule)) {
+      if (!REWRITE_KEYS.has(key)) badKeys.push(`rewrites[${i}].${key}`);
+    }
+  });
+
+  if (badKeys.length > 0) {
+    console.error('\n✗ vercel.json has properties Vercel will reject at deploy time:\n');
+    for (const k of badKeys) console.error(`    ${k}`);
+    console.error(
+      `\n  Allowed in a rewrite: ${[...REWRITE_KEYS].join(', ')}.` +
+        '\n  JSON has no comments — put explanations in code, not in vercel.json.\n'
+    );
+    process.exit(1);
+  }
+
+  const sources = new Set(rewrites.map((r) => r.source));
   const missing = routes.filter((r) => r.path !== '/' && !sources.has(r.path));
 
   if (missing.length > 0) {
     console.error('\n✗ vercel.json is missing rewrites for these routes:\n');
     for (const r of missing) {
-      console.error(
-        `    { "source": "${r.path}", "destination": "${r.path}/index.html" },`
-      );
+      console.error(`    { "source": "${r.path}", "destination": "${r.path}/index.html" },`);
     }
     console.error('\n  Add them ABOVE the "/(.*)" catch-all, then rebuild.\n');
     process.exit(1);
   }
+
+  console.log(`  vercel.json ok (${rewrites.length} rewrites)`);
 } catch (err) {
   if (err.code !== 'ENOENT') throw err;
   console.warn('  (no vercel.json — skipping rewrite check)');

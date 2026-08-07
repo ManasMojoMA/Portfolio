@@ -2,11 +2,7 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "rewrites": [
-    {
-      "_comment": "Routes with build-generated meta must map to their own HTML file BEFORE the SPA catch-all, or crawlers get index.html's tags for every URL. `npm run build` prints the exact list — keep this in sync with src/routes.meta.js.",
-      "source": "/playbooks/tyre-garage",
-      "destination": "/playbooks/tyre-garage/index.html"
-    },
+    { "source": "/playbooks/tyre-garage", "destination": "/playbooks/tyre-garage/index.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
