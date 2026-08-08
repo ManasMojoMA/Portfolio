@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { projects } from '../data/projects';
+import { demoFor } from '../data/demoAccounts';
 import './Projects.css';
 
 const ProjectModal = ({ project, onClose }) => {
@@ -97,27 +98,51 @@ const ProjectModal = ({ project, onClose }) => {
                 </div>
               )}
 
-              {project.demoCredentials && (
-                <div className="modal-section demo-credentials">
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-                    <h3 style={{ margin: 0 }}>Demo Credentials</h3>
-                    {project.demoCredentials.url && (
-                      <a href={project.demoCredentials.url} target="_blank" rel="noopener noreferrer" className="launch-app-btn">
-                        Launch App
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginLeft: '0.5rem'}}>
-                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                          <polyline points="15 3 21 3 21 9"></polyline>
-                          <line x1="10" y1="14" x2="21" y2="3"></line>
-                        </svg>
-                      </a>
+              {/* Demo access. Credentials are shown ONLY when the demo is actually
+                  live — printing an email and password for an app that is not
+                  deployed sends a recruiter to a dead end and makes the whole
+                  portfolio look padded. */}
+              {(() => {
+                const demo = demoFor(project.id)
+                return (
+                  <div className="modal-section demo-credentials">
+                    <div className="demo-head">
+                      <h3>Demo access</h3>
+                      {demo.status === 'live' && demo.url && (
+                        <a href={demo.url} target="_blank" rel="noopener noreferrer" className="launch-app-btn">
+                          Launch App
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '0.5rem' }}>
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                          </svg>
+                        </a>
+                      )}
+                    </div>
+
+                    {demo.status === 'live' ? (
+                      <>
+                        <div className="credentials-box">
+                          {demo.accounts.map((acc) => (
+                            <div className="credential-row" key={acc.role}>
+                              <span className="credential-role">{acc.role}</span>
+                              <span><strong>Email:</strong> {acc.email}</span>
+                              <span><strong>Password:</strong> {acc.password}</span>
+                            </div>
+                          ))}
+                        </div>
+                        {demo.note && <p className="demo-note">{demo.note}</p>}
+                      </>
+                    ) : (
+                      <p className="demo-note demo-note-muted">
+                        {demo.status === 'pending'
+                          ? 'Live demo being set up. Ask me for a walkthrough in the meantime — happy to screen-share it.'
+                          : 'Not deployed publicly. Happy to walk through it on a call or share a recorded demo.'}
+                      </p>
                     )}
                   </div>
-                  <div className="credentials-box">
-                    <p><strong>Email:</strong> {project.demoCredentials.email}</p>
-                    <p><strong>Password:</strong> {project.demoCredentials.password}</p>
-                  </div>
-                </div>
-              )}
+                )
+              })()}
 
               {project.techStack && project.techStack.length > 0 && (
                 <div className="modal-section">

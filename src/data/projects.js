@@ -186,36 +186,6 @@ export const projects = [
     metrics: { timeSaved: '90% faster', costReduction: '100% free', efficiency: '5x match rate' }
   },
   {
-    id: 'ftt-signal-engine',
-    title: 'FTT Signal Engine',
-    subtitle: 'Real-Time Market Analysis & Trading Signals',
-    description: 'A real-time market analysis engine that calculates historical and live market imbalances to provide high-conviction directional trading signals — featuring multi-horizon confluence analysis, technical indicators, cognitive agent reasoning, and audio/visual alerts.',
-    longDescription: `This signal engine processes real-time WebSocket market data streams (via TwelveData) across multiple time horizons (5s, 15s, 1m). It calculates EMA 9/21, RSI 14, Stochastic, OBV, and MFI indicators to generate binary Call/Put signals with confidence scoring (82% threshold). The cognitive agent runs periodic reasoning cycles every 30 minutes, adapting its strategy. Features include signal journaling to SQLite, replay mode for backtesting, and a stunning Next.js frontend with color-coded visual alerts.`,
-    category: 'FinTech / AI',
-    tags: ['Trading', 'Real-Time', 'WebSocket', 'AI', 'Technical Analysis'],
-    techStack: ['Python', 'FastAPI', 'Next.js 14', 'TypeScript', 'WebSocket', 'NumPy', 'Claude AI', 'Gemini', 'SQLite'],
-    color: '#f39c12',
-    gradient: 'linear-gradient(135deg, #f39c12, #e74c3c)',
-    icon: '📈',
-    features: [
-      'Real-time WebSocket streaming from TwelveData market feeds',
-      'Multi-horizon confluence: 5s, 15s, 1m analysis windows',
-      'Technical indicators: EMA 9/21, RSI 14, Stochastic, OBV, MFI',
-      'Cognitive agent with periodic reasoning (Claude AI + Gemini validation)',
-      'Signal journaling with SQLite persistence + replay mode',
-      'Audio alerts + color-coded visual signals with 82% confidence threshold'
-    ],
-    sop: [
-      { step: 1, title: 'Launch Engine', description: 'Start the backend (FastAPI) and frontend (Next.js). The engine connects to market data feeds and begins streaming real-time prices.' },
-      { step: 2, title: 'Monitor Dashboard', description: 'The frontend displays live price charts, indicator values, and signal panels. Color-coded indicators show market conditions.' },
-      { step: 3, title: 'Signal Generation', description: 'When multi-horizon confluence is detected above the 82% confidence threshold, the system generates a Call or Put signal with audio alert.' },
-      { step: 4, title: 'Cognitive Analysis', description: 'Every 30 minutes (after 10-min warmup), the cognitive agent runs a reasoning cycle — analyzing patterns and adapting strategy.' },
-      { step: 5, title: 'Review Journal', description: 'Access the signal journal to review past signals, their accuracy, and use replay mode to backtest historical data.' }
-    ],
-    demoCredentials: { email: 'demo@manasarora.dev', password: 'Demo@2024', url: '' },
-    metrics: { accuracy: '82%+ threshold', latency: '<100ms', analysis: '3 timeframes' }
-  },
-  {
     id: 'sip-bootcamp-attendance',
     title: 'QR Attendance Tracking System',
     subtitle: 'Geofenced QR-Based Attendance',
@@ -285,9 +255,17 @@ export const services = [
 // Every number here must be independently checkable by a visitor.
 // No satisfaction percentages, no cost-reduction averages, no client counts —
 // those cannot be verified and a skeptic who catches one stops believing all of them.
+//
+// The first two are DERIVED, never typed. A visitor can count the cards on the page,
+// so a hand-written number silently becomes a lie the moment a project is added or
+// pulled — which is exactly what happened when the FTT Signal Engine was removed.
 export const stats = [
-  { value: 8, suffix: '+', label: 'Products Shipped' },
-  { value: 3, suffix: '', label: 'Live Demos You Can Try' },
+  { value: projects.length, suffix: '', label: 'Products Shipped' },
+  {
+    value: projects.filter((p) => p.demoCredentials?.url).length,
+    suffix: '',
+    label: 'Live Demos You Can Try'
+  },
   { value: 6, suffix: '', label: 'Garage Automations Mapped' },
   { value: 1, suffix: '', label: 'Free Automation to Start' }
 ];
