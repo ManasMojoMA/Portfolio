@@ -38,6 +38,29 @@ Why this beats publishing credentials on the portfolio:
 `VITE_*` in, and anyone can read them in DevTools. This hides credentials from casual
 view; it does not make them secret. That is only acceptable because of the rules below.
 
+### ⛔ Never point a demo at these backends
+
+Each demo gets its **own** Supabase/Firebase project. These refs belong to the real
+deployments and hold real records — pasting one into a demo's env vars would expose
+live data through a public login:
+
+| Project ref | Belongs to | Notes |
+|---|---|---|
+| `mpidcsyrdtgfamriwjsg.supabase.co` | Appraisal Portal (original) | Also referenced from `university-erp-lms/legacy/` — same database, two checkouts |
+| `bmlrzkvbfmdnzemhyemw.supabase.co` | Internship Tracker (original) | |
+
+Safe demo backends currently in use:
+
+| Project ref | Demo |
+|---|---|
+| `jfsaqbqxxruumjibbtyg.supabase.co` | ChalkZone demo (verified: no real users) |
+| `qr-attendance-demo-cae28` | QR Attendance demo |
+| `simplyform-demo` | SimplyForm demo |
+
+Before deploying any demo, check the connection string against this table. The demo
+folders deliberately ship only `.env.example`, so there is nothing to copy by
+accident — the risk is pasting the wrong value in by hand.
+
 ### Rules for every demo account
 
 1. **A different password per project.** All seven once shared `Demo@2024`, committed
