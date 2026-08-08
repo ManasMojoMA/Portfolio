@@ -2,7 +2,14 @@
 // PROJECT DATA — Manas Arora Portfolio
 // All projects rebranded (no university references)
 // Accurate descriptions based on actual codebase
+//
+// Demo URLs and credentials live in data/demoAccounts.js, NOT here. Each project's
+// `demoCredentials` field is legacy and no longer read — keeping two copies of "is
+// this deployed?" is how the live-demo count silently went stale.
 // ============================================
+// Extension included so this module also loads under plain Node (verification
+// scripts), not just through Vite's resolver.
+import { demoAccounts } from './demoAccounts.js';
 
 export const projects = [
   {
@@ -262,7 +269,7 @@ export const services = [
 export const stats = [
   { value: projects.length, suffix: '', label: 'Products Shipped' },
   {
-    value: projects.filter((p) => p.demoCredentials?.url).length,
+    value: Object.values(demoAccounts).filter((d) => d.status === 'live').length,
     suffix: '',
     label: 'Live Demos You Can Try'
   },

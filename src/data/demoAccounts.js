@@ -50,12 +50,13 @@ export const demoAccounts = {
   // ---- Awaiting deployment. See DEMOS.md for the runbook. ----
 
   'sip-bootcamp-attendance': {
-    status: 'pending',
-    url: '',
+    status: 'live',
+    url: 'https://qr-attendance-demo-cae28.web.app',
     accounts: [
-      { role: 'Admin', email: 'demo.admin@qrattend.demo', password: 'SET-ON-DEPLOY' },
-      { role: 'Student', email: 'demo.student@qrattend.demo', password: 'SET-ON-DEPLOY' }
-    ]
+      { role: 'Admin', email: 'demo.admin@qrattend.demo', password: 'Dmg7kOzizPs8xiHATOE4' },
+      { role: 'Student', email: 'demo.student@qrattend.demo', password: 'ofWBGBSy9VegIQPnlXek' }
+    ],
+    note: 'Easiest route in: use the "Explore as Admin" / "Explore as Student" buttons on the login screen — one click, no typing. The credentials above are the same accounts if you prefer.'
   },
 
   'employee-appraisal-portal': {

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { projects, testimonials } from '../data/projects'
+import { demoFor } from '../data/demoAccounts'
 import './Proof.css'
 
 // Replaces the old Testimonials section.
@@ -44,7 +45,9 @@ const buildEvidence = (liveCount) => [
 export default function Proof() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
 
-  const liveDemos = projects.filter((p) => p.demoCredentials?.url)
+  // Live status comes from demoAccounts, the single source of truth. Reading it from
+  // projects.demoCredentials kept this list a deployment behind.
+  const liveDemos = projects.filter((p) => demoFor(p.id).status === 'live')
   const hasTestimonials = testimonials.length > 0
 
   // Drop the "click the demos" card entirely if nothing is actually deployed.
@@ -107,7 +110,7 @@ export default function Proof() {
                 <a
                   key={p.id}
                   className="proof-demo"
-                  href={p.demoCredentials.url}
+                  href={demoFor(p.id).url}
                   target="_blank"
                   rel="noreferrer noopener"
                 >
