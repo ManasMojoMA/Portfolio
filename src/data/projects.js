@@ -33,7 +33,7 @@ export const projects = [
       'Real-time analytics dashboards with exportable reports'
     ],
     sop: [
-      { step: 1, title: 'Login with Role', description: 'Choose a demo role (Student, Faculty, Admin, etc.) and log in. Each role reveals a tailored dashboard with relevant modules and permissions.' },
+      { step: 1, title: 'Pick a role', description: 'The login screen offers all eight roles as one-click buttons, grouped into Learning, Operations and Leadership. Worth comparing Student against Super Admin — they are effectively different products.' },
       { step: 2, title: 'Explore Attendance', description: 'Navigate to the Attendance module. View attendance records, mark attendance for sessions, and see analytics by date range and section.' },
       { step: 3, title: 'AI Knowledge Base', description: 'Go to the AI KB module. Browse documents, ask questions to the AI Assistant — it uses RAG to search embedded documents and provide accurate answers.' },
       { step: 4, title: 'Support Tickets', description: 'Open the Tickets module. View the kanban board, create a new ticket, drag tickets between columns, and see resolution workflows in action.' },
@@ -153,7 +153,7 @@ export const projects = [
       'Zod-powered validation and conditional field rendering'
     ],
     sop: [
-      { step: 1, title: 'Create Account', description: 'Sign up or log in with email. You\'ll land on the dashboard showing all your forms with quick stats.' },
+      { step: 1, title: 'Get in without signing up', description: 'Click "Explore without signing up" on the login screen. You land in a private workspace with a sample form already built, so there is something to open straight away.' },
       { step: 2, title: 'Build a Form', description: 'Click "New Form". Use the drag-and-drop builder to add fields — text, email, dropdowns, checkboxes, ratings, and more.' },
       { step: 3, title: 'Preview & Publish', description: 'Use Preview mode to test your form. When satisfied, publish it to generate a shareable public link (/f/your-slug).' },
       { step: 4, title: 'Collect Responses', description: 'Share the link. Responses stream in real-time to your dashboard. View individual submissions or aggregate analytics.' },
@@ -213,7 +213,7 @@ export const projects = [
       'One-click XLSX export with offline persistence via Firestore'
     ],
     sop: [
-      { step: 1, title: 'Admin: Create Session', description: 'Log in as admin. Create a new session with date, time slot, topic, facilitator, room, and section.' },
+      { step: 1, title: 'Admin: Create Session', description: 'Click "Explore as Admin" on the login screen — no credentials needed. Create a session with date, time slot, topic, facilitator, room and section.' },
       { step: 2, title: 'Generate QR Code', description: 'The system generates a unique QR code for the session. Display it on screen for attendees to scan.' },
       { step: 3, title: 'Student: Scan QR', description: 'Students open the app, navigate to the scanner, and scan the displayed QR code to mark their attendance.' },
       { step: 4, title: 'Geofence Verification', description: 'If enabled, the system checks the student\'s GPS location against the admin\'s position to verify physical presence.' },

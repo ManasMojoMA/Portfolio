@@ -144,16 +144,19 @@ const ProjectModal = ({ project, onClose }) => {
                     {demo.entry === 'roles' && (
                       <>
                         <p className="demo-note">
-                          No signup, no credentials to copy. The login screen has a button
-                          for each role — pick one and you are straight in.
+                          {(demo.roles?.length ?? 0) > 1
+                            ? 'No signup, no credentials to copy. The login screen has a button for each role — pick one and you are straight in.'
+                            : 'No signup, no credentials to copy. One button on the login screen and you are straight in.'}
                         </p>
-                        <div className="demo-roles">
-                          {(demo.roles ?? []).map((role) => (
-                            <span className="demo-role-chip" key={role}>
-                              Explore as {role}
-                            </span>
-                          ))}
-                        </div>
+                        {(demo.roles?.length ?? 0) > 1 && (
+                          <div className="demo-roles">
+                            {demo.roles.map((role) => (
+                              <span className="demo-role-chip" key={role}>
+                                Explore as {role}
+                              </span>
+                            ))}
+                          </div>
+                        )}
                       </>
                     )}
 

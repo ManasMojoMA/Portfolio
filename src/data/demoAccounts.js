@@ -59,11 +59,13 @@ export const demoAccounts = {
 
   simplyform: {
     status: 'live',
-    // Anonymous sign-in button is committed; flip to 'roles' once deployed and
-    // Anonymous auth is enabled in the Firebase console.
-    entry: 'preparing',
+    // Anonymous sign-in rather than a shared demo account: no credential exists at
+    // all, and each visitor gets a private workspace. Verified against the live
+    // rules that one guest cannot read or edit another's forms.
+    entry: 'roles',
     url: 'https://simplyform.vercel.app',
-    note: 'Build a form, publish it, and watch responses land on the dashboard.'
+    roles: ['Guest workspace'],
+    note: 'One button, no signup. You get a private workspace with a sample form already in it — edit it, publish it, and submit a response to see it land on the dashboard.'
   },
 
   scaleresume: {
