@@ -38,16 +38,23 @@ export const demoAccounts = {
     note: 'Pick a role on the login screen — one click, nothing to type.'
   },
 
-  // The Supabase project this pointed at (jfsaqbqxxruumjibbtyg.supabase.co) no longer
-  // resolves in DNS — deleted, not paused, since a paused project still answers. The
-  // site still serves its landing page, but nobody can log in, so it is NOT live.
-  // Needs a fresh Supabase project, migrations and a seed before it comes back.
   'chalkzone-erp': {
-    status: 'pending',
-    entry: 'preparing',
-    url: '',
-    roles: ['Student', 'Faculty', 'HR', 'Manager', 'Admin'],
-    note: 'Multi-role — the dashboard changes completely depending on the role you hold.'
+    status: 'live',
+    entry: 'roles',
+    url: 'https://chalkzone-ma.vercel.app',
+    // All eight, because the dashboard is almost entirely different per role —
+    // showing one would misrepresent the app.
+    roles: [
+      'Student',
+      'Parent',
+      'Faculty',
+      'HR',
+      'Manager',
+      'Admin',
+      'Executive',
+      'Super Admin'
+    ],
+    note: 'Eight roles, grouped on the login screen. Worth comparing Student against Super Admin — they are effectively different products.'
   },
 
   simplyform: {
