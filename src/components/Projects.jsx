@@ -154,16 +154,22 @@ const ProjectModal = ({ project, onClose }) => {
                       </p>
                     )}
 
-                    {demo.entry === 'credentials' && (
-                      <div className="credentials-box">
-                        {(demo.accounts ?? []).map((acc) => (
-                          <div className="credential-row" key={acc.role}>
-                            <span className="credential-role">{acc.role}</span>
-                            <span><strong>Email:</strong> {acc.email}</span>
-                            <span><strong>Password:</strong> {acc.password}</span>
+                    {demo.entry === 'signup' && (
+                      <>
+                        <p className="demo-note">
+                          Register with any email — it takes a few seconds and the account
+                          is yours to break. Role buttons are on the way here too.
+                        </p>
+                        {demo.roles?.length > 0 && (
+                          <div className="demo-roles">
+                            {demo.roles.map((role) => (
+                              <span className="demo-role-chip" key={role}>
+                                {role}
+                              </span>
+                            ))}
                           </div>
-                        ))}
-                      </div>
+                        )}
+                      </>
                     )}
 
                     {demo.note && <p className="demo-note">{demo.note}</p>}
