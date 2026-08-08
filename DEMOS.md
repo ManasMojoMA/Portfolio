@@ -19,25 +19,55 @@ look. A recorded walkthrough shows the interesting part better than a login woul
 
 ---
 
-## Demo credentials — the rules
+## Demo access — the standard
 
-Defined in `src/data/demoAccounts.js`. One file, one place to rotate.
+**Every demo app puts "Explore as &lt;Role&gt;" buttons on its own login screen.**
+Adopted after the QR Attendance deploy, where it worked well enough to become the
+rule. The portfolio then just says *"Explore the app"* and links.
 
-They are **public by design** — printed on the portfolio so a recruiter never has to
-email you first. Secrecy is not the protection; blast radius is:
+Why this beats publishing credentials on the portfolio:
 
-1. **A different password per project.** Previously all seven shared `Demo@2024`,
-   committed in a public repo — one leak was seven leaks.
-2. **Never a password you use anywhere else.**
-3. **Assume visitors will edit and delete things.** Seed fake data and reset it on a
-   schedule; see "Keeping demos clean" below.
-4. **Least privilege.** A demo role should not delete all users or export anything.
-5. **Nothing real behind them.** No real student names, staff records or phone numbers.
+- One click. No copy-paste, no typos, no wrong-account confusion.
+- Rotating a password touches that app's env vars only — never the portfolio.
+- A recruiter sees **every role the app has**, not one arbitrary account. On the
+  appraisal portal that is the whole point: hidden rubrics and dean moderation only
+  make sense across four roles.
+- The portfolio stops being a credential registry that drifts out of sync.
+
+**Honest limit:** the passwords still sit in each app's client bundle — Vite compiles
+`VITE_*` in, and anyone can read them in DevTools. This hides credentials from casual
+view; it does not make them secret. That is only acceptable because of the rules below.
+
+### Rules for every demo account
+
+1. **A different password per project.** All seven once shared `Demo@2024`, committed
+   in a public repo — one leak was seven leaks.
+2. **Never a password used anywhere else.**
+3. **Assume visitors will edit and delete things.** Seed fake data; see "Keeping
+   demos clean".
+4. **Least privilege.** A demo role must not delete all users or export anything, and
+   must be privileged no further than that one demo project.
+5. **Nothing real behind them.** No real names, staff records or phone numbers.
 
 Generate one per project:
 ```powershell
 -join ((48..57)+(65..90)+(97..122) | Get-Random -Count 16 | % {[char]$_})
 ```
+
+### Implementing the buttons
+
+Reference implementation: `qr-attendance-demo/src/config/app.ts` +
+`src/components/LoginPage.tsx`.
+
+1. A `DEMO_MODE` flag and a `DEMO_ROLES` array in config, both env-driven, so the
+   buttons never appear in a real deployment.
+2. Each role signs in with email + password behind the scenes.
+3. **Swallow the auth error.** Surfacing the raw provider message distinguishes "no
+   such user" from "wrong password" — free reconnaissance on a public login.
+4. Say the data is disposable, so visitors feel free to click things.
+
+`entry` in `demoAccounts.js` tracks which apps are converted: `'roles'` (done),
+`'credentials'` (still publishing a login — convert it), `'sso'` (Google only).
 
 ---
 

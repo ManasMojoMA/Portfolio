@@ -1,99 +1,96 @@
 // ============================================
-// DEMO ACCOUNTS — one place to define and rotate them
+// DEMO ACCESS — how a recruiter gets into each project
 //
-// THESE ARE PUBLIC BY DESIGN. They are printed on a public portfolio page so a
-// recruiter can log in without emailing you first. Trying to keep them secret is
-// pointless — the protection is not secrecy, it is BLAST RADIUS:
+// THE STANDARD (adopted 2026-08-08, after the QR Attendance deploy):
+// every demo app puts "Explore as <Role>" buttons on its own login screen. One
+// click, no typing, and every role the app has is visible right where it is needed.
+// The portfolio then only has to say "explore the app" and link — it stops being a
+// credential registry that has to be kept in sync.
 //
-//   1. A different password per project, so one leak is not seven leaks.
-//     (Previously every project shared `Demo@2024`, committed in a public repo.)
-//   2. Never a password used anywhere else, ever.
-//   3. The data behind them is fake and disposable, and resets on a schedule —
-//      assume every visitor will edit and delete things, because some will.
-//   4. Least privilege: a demo role should not be able to delete all users,
-//      change billing, or export anything real.
-//   5. Nothing real behind them. No real student names, employee records or
-//      phone numbers in any seeded demo database.
+// Why this beats publishing credentials:
+//   - No copy-paste, no typos, no wrong-account confusion.
+//   - Rotating a password touches only that app's env vars, never this file.
+//   - A recruiter sees every applicable role rather than one arbitrary account.
 //
-// Rotating: change the password here AND in that project's auth provider. Nothing
-// else in the portfolio needs touching.
+// Honest limit: the demo passwords still live in each app's client bundle (Vite
+// compiles VITE_* in, readable in DevTools). This hides them from casual view, it
+// does not make them secret. That is acceptable only because every demo account is
+// fake, disposable, and privileged no further than that one demo project.
+//
+// `entry` describes how a visitor actually gets in:
+//   'roles'       — the app has Explore-as buttons. Preferred. Portfolio shows no creds.
+//   'credentials' — not yet converted; the portfolio must still publish a login.
+//   'sso'         — Google sign-in only, nothing to publish.
+//
+// `status`:
+//   'live' | 'pending' (being deployed) | 'private' (walkthrough on request)
 // ============================================
 
-/**
- * `status` drives what the portfolio shows, so it can never claim a demo that is
- * not there:
- *   'live'    — deployed, credentials work, link shown
- *   'pending' — being deployed; shown as "demo coming soon", no dead link
- *   'private' — will not be public; shown as "walkthrough on request"
- */
 export const demoAccounts = {
+  'sip-bootcamp-attendance': {
+    status: 'live',
+    entry: 'roles',
+    url: 'https://qr-attendance-demo-cae28.web.app',
+    roles: ['Admin', 'Student'],
+    note: 'Pick a role on the login screen — one click, nothing to type.'
+  },
+
   'chalkzone-erp': {
     status: 'live',
+    // TODO: convert to 'roles' — this app has the most roles of any project and
+    // benefits most from a picker.
+    entry: 'credentials',
     url: 'https://chalkzone-ma.vercel.app',
-    accounts: [{ role: 'Demo user', email: 'demo@chalkzone.demo', password: 'ROTATE-ME-chalkzone' }],
-    note: 'Multi-role — pick a role at login to see different dashboards.'
+    accounts: [
+      { role: 'Demo user', email: 'demo@chalkzone.demo', password: 'ROTATE-ME-chalkzone' }
+    ],
+    note: 'Multi-role — choose a role at login to see different dashboards.'
   },
 
   simplyform: {
     status: 'live',
+    entry: 'credentials', // TODO: convert to 'roles'
     url: 'https://simplyform.vercel.app',
-    accounts: [{ role: 'Demo user', email: 'demo@simplyform.demo', password: 'ROTATE-ME-simplyform' }]
+    accounts: [
+      { role: 'Demo user', email: 'demo@simplyform.demo', password: 'ROTATE-ME-simplyform' }
+    ]
   },
 
   scaleresume: {
     status: 'live',
+    entry: 'sso',
     url: 'https://scaleresume.vercel.app',
-    accounts: [{ role: 'Google sign-in', email: 'Sign in with Google', password: 'No password needed' }],
-    note: 'Uses Google SSO — no demo password required.'
+    note: 'Sign in with any Google account — nothing to set up, and your drafts stay yours.'
   },
 
-  // ---- Awaiting deployment. See DEMOS.md for the runbook. ----
-
-  'sip-bootcamp-attendance': {
-    status: 'live',
-    url: 'https://qr-attendance-demo-cae28.web.app',
-    accounts: [
-      { role: 'Admin', email: 'demo.admin@qrattend.demo', password: 'Dmg7kOzizPs8xiHATOE4' },
-      { role: 'Student', email: 'demo.student@qrattend.demo', password: 'ofWBGBSy9VegIQPnlXek' }
-    ],
-    note: 'Easiest route in: use the "Explore as Admin" / "Explore as Student" buttons on the login screen — one click, no typing. The credentials above are the same accounts if you prefer.'
-  },
+  // ---- Awaiting deployment. Each ships with role buttons from the start. ----
 
   'employee-appraisal-portal': {
     status: 'pending',
+    entry: 'roles',
     url: '',
-    accounts: [
-      { role: 'Employee', email: 'demo.employee@appraisal.demo', password: 'SET-ON-DEPLOY' },
-      { role: 'Evaluator', email: 'demo.evaluator@appraisal.demo', password: 'SET-ON-DEPLOY' },
-      { role: 'Dean', email: 'demo.dean@appraisal.demo', password: 'SET-ON-DEPLOY' },
-      { role: 'Admin', email: 'demo.admin@appraisal.demo', password: 'SET-ON-DEPLOY' }
-    ],
-    note: 'Four roles — the hidden-rubric and dean-moderation behaviour only makes sense across them.'
+    roles: ['Employee', 'Evaluator', 'Dean', 'Admin'],
+    note: 'Four roles — hidden rubrics and dean moderation only make sense across them.'
   },
 
   placeflow: {
     status: 'pending',
+    entry: 'roles',
     url: '',
-    accounts: [
-      { role: 'Student', email: 'demo.student@placeflow.demo', password: 'SET-ON-DEPLOY' },
-      { role: 'Admin', email: 'demo.admin@placeflow.demo', password: 'SET-ON-DEPLOY' }
-    ]
+    roles: ['Student', 'Admin']
   },
 
   'internship-tracker': {
     status: 'pending',
+    entry: 'roles',
     url: '',
-    accounts: [
-      { role: 'Student', email: 'demo.student@internship.demo', password: 'SET-ON-DEPLOY' },
-      { role: 'Faculty', email: 'demo.faculty@internship.demo', password: 'SET-ON-DEPLOY' },
-      { role: 'Admin', email: 'demo.admin@internship.demo', password: 'SET-ON-DEPLOY' }
-    ]
+    roles: ['Student', 'Faculty', 'Admin']
   }
 };
 
 /** Demo info for a project, or a safe default if it has no entry. */
 export function demoFor(projectId) {
-  return demoAccounts[projectId] ?? { status: 'private', url: '', accounts: [] };
+  return demoAccounts[projectId] ?? { status: 'private', entry: 'roles', url: '', roles: [] };
 }
 
 export const isLive = (projectId) => demoFor(projectId).status === 'live';

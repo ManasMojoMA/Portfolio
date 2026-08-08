@@ -98,48 +98,75 @@ const ProjectModal = ({ project, onClose }) => {
                 </div>
               )}
 
-              {/* Demo access. Credentials are shown ONLY when the demo is actually
-                  live — printing an email and password for an app that is not
-                  deployed sends a recruiter to a dead end and makes the whole
-                  portfolio look padded. */}
+              {/* How to get in. Apps with role buttons on their own login screen need
+                  no credentials here at all — that is the standard, and the portfolio
+                  is better for not being a credential registry. Anything still on
+                  published logins says so rather than leaving a recruiter stuck. */}
               {(() => {
                 const demo = demoFor(project.id)
+
+                if (demo.status !== 'live') {
+                  return (
+                    <div className="modal-section demo-credentials">
+                      <div className="demo-head"><h3>Try it</h3></div>
+                      <p className="demo-note demo-note-muted">
+                        {demo.status === 'pending'
+                          ? 'Live demo being set up. Happy to screen-share a walkthrough in the meantime.'
+                          : 'Not deployed publicly. Happy to walk through it on a call or share a recording.'}
+                      </p>
+                    </div>
+                  )
+                }
+
                 return (
                   <div className="modal-section demo-credentials">
                     <div className="demo-head">
-                      <h3>Demo access</h3>
-                      {demo.status === 'live' && demo.url && (
-                        <a href={demo.url} target="_blank" rel="noopener noreferrer" className="launch-app-btn">
-                          Launch App
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '0.5rem' }}>
-                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                            <polyline points="15 3 21 3 21 9"></polyline>
-                            <line x1="10" y1="14" x2="21" y2="3"></line>
-                          </svg>
-                        </a>
-                      )}
+                      <h3>Try it</h3>
+                      <a href={demo.url} target="_blank" rel="noopener noreferrer" className="launch-app-btn">
+                        Explore the app
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '0.5rem' }}>
+                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                          <polyline points="15 3 21 3 21 9"></polyline>
+                          <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                      </a>
                     </div>
 
-                    {demo.status === 'live' ? (
+                    {demo.entry === 'roles' && (
                       <>
-                        <div className="credentials-box">
-                          {demo.accounts.map((acc) => (
-                            <div className="credential-row" key={acc.role}>
-                              <span className="credential-role">{acc.role}</span>
-                              <span><strong>Email:</strong> {acc.email}</span>
-                              <span><strong>Password:</strong> {acc.password}</span>
-                            </div>
+                        <p className="demo-note">
+                          No signup, no credentials to copy. The login screen has a button
+                          for each role — pick one and you are straight in.
+                        </p>
+                        <div className="demo-roles">
+                          {(demo.roles ?? []).map((role) => (
+                            <span className="demo-role-chip" key={role}>
+                              Explore as {role}
+                            </span>
                           ))}
                         </div>
-                        {demo.note && <p className="demo-note">{demo.note}</p>}
                       </>
-                    ) : (
-                      <p className="demo-note demo-note-muted">
-                        {demo.status === 'pending'
-                          ? 'Live demo being set up. Ask me for a walkthrough in the meantime — happy to screen-share it.'
-                          : 'Not deployed publicly. Happy to walk through it on a call or share a recorded demo.'}
+                    )}
+
+                    {demo.entry === 'sso' && (
+                      <p className="demo-note">
+                        Sign in with any Google account — nothing to set up.
                       </p>
                     )}
+
+                    {demo.entry === 'credentials' && (
+                      <div className="credentials-box">
+                        {(demo.accounts ?? []).map((acc) => (
+                          <div className="credential-row" key={acc.role}>
+                            <span className="credential-role">{acc.role}</span>
+                            <span><strong>Email:</strong> {acc.email}</span>
+                            <span><strong>Password:</strong> {acc.password}</span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {demo.note && <p className="demo-note">{demo.note}</p>}
                   </div>
                 )
               })()}

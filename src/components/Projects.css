@@ -490,3 +490,22 @@
   margin-top: 0;
   color: var(--color-text-tertiary);
 }
+
+/* Role chips — mirror the buttons a visitor will actually see on the app's own
+   login screen, so the portfolio sets the expectation and the app fulfils it. */
+.demo-roles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.demo-role-chip {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-accent-start);
+  background: rgba(41, 151, 255, 0.1);
+  border: 1px solid rgba(41, 151, 255, 0.25);
+  border-radius: var(--radius-full);
+  padding: var(--space-2) var(--space-4);
+}
