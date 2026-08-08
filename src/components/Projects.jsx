@@ -111,9 +111,18 @@ const ProjectModal = ({ project, onClose }) => {
                       <div className="demo-head"><h3>Try it</h3></div>
                       <p className="demo-note demo-note-muted">
                         {demo.status === 'pending'
-                          ? 'Live demo being set up. Happy to screen-share a walkthrough in the meantime.'
+                          ? 'Demo access is being set up — it will open with one click per role, no signup. Happy to screen-share a walkthrough before then.'
                           : 'Not deployed publicly. Happy to walk through it on a call or share a recording.'}
                       </p>
+                      {demo.roles?.length > 0 && (
+                        <div className="demo-roles">
+                          {demo.roles.map((role) => (
+                            <span className="demo-role-chip" key={role}>
+                              {role}
+                            </span>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   )
                 }
@@ -154,17 +163,17 @@ const ProjectModal = ({ project, onClose }) => {
                       </p>
                     )}
 
-                    {demo.entry === 'signup' && (
+                    {demo.entry === 'preparing' && (
                       <>
                         <p className="demo-note">
-                          Register with any email — it takes a few seconds and the account
-                          is yours to break. Role buttons are on the way here too.
+                          One-click access is being switched on for this one. No signup
+                          will be needed — just a button for each role, same as the others.
                         </p>
                         {demo.roles?.length > 0 && (
                           <div className="demo-roles">
                             {demo.roles.map((role) => (
                               <span className="demo-role-chip" key={role}>
-                                {role}
+                                Explore as {role}
                               </span>
                             ))}
                           </div>

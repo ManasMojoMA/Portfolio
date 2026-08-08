@@ -18,10 +18,12 @@
 // fake, disposable, and privileged no further than that one demo project.
 //
 // `entry` describes how a visitor actually gets in. NOTE: 'credentials' is gone —
-// the portfolio no longer publishes a login for anything, ever.
-//   'roles'  — the app has Explore-as buttons. Preferred.
-//   'signup' — free self-registration; role buttons written but not yet deployed.
-//   'sso'    — Google sign-in only, nothing to publish.
+// the portfolio no longer publishes a login for anything, ever. Recruiters use the
+// one-click role buttons on each app's own login screen, nothing else.
+//   'roles'     — buttons are live. The goal state for every project.
+//   'preparing' — buttons are built but not yet deployed. Say so; never send a
+//                 recruiter off to register an account themselves.
+//   'sso'       — Google sign-in only, nothing to publish.
 //
 // `status`:
 //   'live' | 'pending' (being deployed) | 'private' (walkthrough on request)
@@ -36,20 +38,23 @@ export const demoAccounts = {
     note: 'Pick a role on the login screen — one click, nothing to type.'
   },
 
+  // The Supabase project this pointed at (jfsaqbqxxruumjibbtyg.supabase.co) no longer
+  // resolves in DNS — deleted, not paused, since a paused project still answers. The
+  // site still serves its landing page, but nobody can log in, so it is NOT live.
+  // Needs a fresh Supabase project, migrations and a seed before it comes back.
   'chalkzone-erp': {
-    status: 'live',
-    // Role buttons are written and awaiting deploy; until then a recruiter registers
-    // in a few seconds. Never publish credentials here again — the placeholders that
-    // sat here previously were never real, so anyone who tried them simply failed.
-    entry: 'signup',
-    url: 'https://chalkzone-ma.vercel.app',
+    status: 'pending',
+    entry: 'preparing',
+    url: '',
     roles: ['Student', 'Faculty', 'HR', 'Manager', 'Admin'],
     note: 'Multi-role — the dashboard changes completely depending on the role you hold.'
   },
 
   simplyform: {
     status: 'live',
-    entry: 'signup',
+    // Anonymous sign-in button is committed; flip to 'roles' once deployed and
+    // Anonymous auth is enabled in the Firebase console.
+    entry: 'preparing',
     url: 'https://simplyform.vercel.app',
     note: 'Build a form, publish it, and watch responses land on the dashboard.'
   },
