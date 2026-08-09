@@ -92,6 +92,55 @@ Reference implementation: `qr-attendance-demo/src/config/app.ts` +
 `entry` in `demoAccounts.js` tracks which apps are converted: `'roles'` (done),
 `'credentials'` (still publishing a login — convert it), `'sso'` (Google only).
 
+### Freeze account management — always
+
+The role buttons hand every visitor an admin session. That is fine for the data,
+which is invented and disposable, and not fine for the accounts. Left open, a
+visitor can create an admin under an address they control — which survives every
+password rotation — or delete the demo logins and break the demo for everyone
+after them. **The account is the asset; the fake data behind it is not the point.**
+
+So in every demo, freeze anything that creates, deletes or re-roles a user, and
+leave everything else fully editable. The features are what a recruiter came to
+see; only the accounts are locked.
+
+Three things to get right:
+
+1. **Enforce on the server, not in the UI.** Hiding a button protects nothing —
+   session tokens are readable in DevTools and the endpoint is callable directly.
+   Hide the form as a courtesy and put the real check in Firestore rules, the
+   server action, or the Edge Function.
+2. **Put the guard *after* authentication.** A guard at the top of a handler
+   answers an anonymous caller with "demo restricted" instead of `401`, which
+   confirms the endpoint exists and skips the rate limiting behind it.
+3. **Find the account-*minting* path, not just the obvious screen.** PlaceFlow's
+   was `auth-bootstrap` — a public function that turns a student row plus a date
+   of birth into a permanent login. Blocking the Admins page would have missed it:
+   an admin could add a row with invented details and mint an account anyway.
+   Blocking that one function meant Add Student and CSV import could stay live.
+
+Where it landed, per app:
+
+| App | Frozen | Enforced by |
+|---|---|---|
+| QR Attendance | add/remove admins, write students | Firestore rules |
+| ChalkZone | create/delete/re-role users | 7 guards in the server actions |
+| PlaceFlow | `admin-create`, `admin-delete`, `auth-bootstrap` | Edge Functions, after authz |
+| SimplyForm | self-registration | UI only — see below |
+
+SimplyForm is the exception and worth knowing about. Firebase Auth is a public
+API, so `accounts:signUp` is always reachable with the key from the bundle, and
+the project-level "disable create" switch cannot be used — anonymous sign-in goes
+through that same endpoint, so turning it on breaks the Explore button and takes
+the demo down. Acceptable there only because there is nothing to escalate to:
+rules scope every form to the owner's uid and the `role` field is never consulted,
+so a self-made account reaches no further than the anonymous guest already does.
+**Do not copy that reasoning to an app that has real roles.**
+
+Verify by attacking, never by reading. Sign in with the demo role, call the
+endpoint directly, and confirm a `403`; then confirm the ordinary features still
+work and an anonymous caller still gets `401`.
+
 ---
 
 ## 1. QR Attendance — `SIP Bootcamp`
