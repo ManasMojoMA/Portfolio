@@ -86,10 +86,11 @@ export const demoAccounts = {
   },
 
   placeflow: {
-    status: 'pending',
+    status: 'live',
     entry: 'roles',
-    url: '',
-    roles: ['Student', 'Admin']
+    url: 'https://placeflow-demo.vercel.app',
+    roles: ['Student', 'Admin'],
+    note: 'Two buttons, no signup. The student board only shows jobs you actually qualify for — sign in as Admin, change a job\'s eligibility rules, and watch what the student can see change with it.'
   },
 
   'internship-tracker': {
