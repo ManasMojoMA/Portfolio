@@ -78,11 +78,11 @@ export const demoAccounts = {
   // ---- Awaiting deployment. Each ships with role buttons from the start. ----
 
   'employee-appraisal-portal': {
-    status: 'pending',
+    status: 'live',
     entry: 'roles',
-    url: '',
-    roles: ['Employee', 'Evaluator', 'Dean', 'Admin'],
-    note: 'Four roles — hidden rubrics and dean moderation only make sense across them.'
+    url: 'https://appraisal-demo-alpha.vercel.app',
+    roles: ['Faculty', 'Evaluator', 'Dean', 'Admin'],
+    note: 'Four buttons, because the same appraisal cycle looks different from each seat. Start as Faculty and submit a self-review, then score it as Evaluator against a rubric the faculty member never sees, then open the Dean view — one of the two evaluators marks about twelve points tighter than the other, which is the whole reason moderation exists.'
   },
 
   placeflow: {
