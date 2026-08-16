@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
+import EmailCta from '../components/EmailCta';
 import { Link } from 'react-router-dom';
 import SiteNav from '../components/SiteNav';
 import SiteFooter from '../components/SiteFooter';
@@ -117,6 +118,9 @@ function Calculator() {
     </div>
   );
 }
+
+/** Prefilled so the first message already answers the questions I would ask. */
+const CTA_BODY = "Hi Manas,\n\nMy business is:\nWhat eats the most time each week:\nWhat I'd like automated:\n\nBest time to talk:\n";
 
 export default function PlaybookTyreGarage() {
   const heroAutomation = automations.find((a) => a.hero);
@@ -326,9 +330,13 @@ export default function PlaybookTyreGarage() {
             before we discuss anything else.
           </p>
           <div className="pb-cta-actions">
-            <a className="pb-btn pb-btn-primary" href="mailto:aroramanasm07@gmail.com?subject=Simplymation%20—%20free%20automation%20for%20my%20garage">
+            <EmailCta
+              className="pb-btn pb-btn-primary"
+              subject="Simplymation — free automation for my business"
+              body={CTA_BODY}
+            >
               Book the free 90 minutes
-            </a>
+            </EmailCta>
             <Link className="pb-btn pb-btn-ghost" to="/">
               See what I have built before
             </Link>

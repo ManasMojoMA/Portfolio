@@ -290,3 +290,26 @@
     min-width: 100%;
   }
 }
+
+/* Delivery feedback under the form. Only ever shown for a real outcome —
+   the form used to have no failure state because it never actually sent. */
+.form-note {
+  margin-top: 0.9rem;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.form-note-error {
+  color: #ffb4b4;
+}
+
+.form-note a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

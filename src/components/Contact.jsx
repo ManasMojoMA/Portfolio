@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import './Contact.css';
+import { CONTACT_EMAIL } from './EmailCta';
 
 const sanitizeInput = (str) => {
   if (!str) return '';
@@ -27,6 +28,8 @@ const Contact = () => {
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
+  /** idle | sending | sent | failed | unconfigured */
+  const [status, setStatus] = useState('idle');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -44,17 +47,55 @@ const Contact = () => {
     setFocused(prev => ({ ...prev, [name]: false }));
   };
 
-  const handleSubmit = (e) => {
+  /**
+   * Deliver the message, or say plainly that it was not delivered.
+   *
+   * This used to be a setTimeout with the comment "Simulate sending". It showed
+   * a success tick, cleared the fields and threw the message away — so a
+   * visitor who took the trouble to write something was told it had arrived
+   * while it went nowhere. On a site whose whole purpose is being contacted,
+   * losing the message silently is the worst outcome available; a form that
+   * admits it is not wired up is strictly better.
+   *
+   * VITE_CONTACT_ENDPOINT takes any URL that accepts a JSON POST — a Google
+   * Apps Script web app, Formspree, a serverless function. When it is unset the
+   * form does not pretend: it offers the email address instead.
+   */
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData.name && formData.email && formData.message) {
-      // Simulate sending
+    if (!formData.name || !formData.email || !formData.message) return;
+
+    const endpoint = import.meta.env.VITE_CONTACT_ENDPOINT;
+    if (!endpoint) {
+      setStatus('unconfigured');
+      return;
+    }
+
+    setStatus('sending');
+    try {
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: sanitizeInput(formData.name),
+          email: sanitizeInput(formData.email),
+          message: sanitizeInput(formData.message),
+          sentAt: new Date().toISOString(),
+          source: 'portfolio-contact-form',
+        }),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+
+      setStatus('sent');
+      setIsSubmitted(true);
+      setFormData({ name: '', email: '', message: '' });
       setTimeout(() => {
-        setIsSubmitted(true);
-        setTimeout(() => {
-          setIsSubmitted(false);
-          setFormData({ name: '', email: '', message: '' });
-        }, 3000);
-      }, 500);
+        setIsSubmitted(false);
+        setStatus('idle');
+      }, 4000);
+    } catch {
+      // Never claim success on a failed request — the sender would never know.
+      setStatus('failed');
     }
   };
 
@@ -110,7 +151,7 @@ const Contact = () => {
               </div>
               <div>
                 <h3>Email</h3>
-                <p>aroramanasm07@gmail.com</p>
+                <p>{CONTACT_EMAIL}</p>
               </div>
             </motion.div>
             <motion.div className="info-card" variants={itemVariants}>
@@ -232,10 +273,27 @@ const Contact = () => {
                         required
                       />
                     </div>
-                    <button type="submit" className="submit-btn">
-                      <span className="btn-text">Send Message</span>
+                    <button type="submit" className="submit-btn" disabled={status === 'sending'}>
+                      <span className="btn-text">{status === 'sending' ? 'Sending…' : 'Send Message'}</span>
                       <div className="btn-gradient"></div>
                     </button>
+
+                    {/* A failed send has to be visible. The previous version
+                        could not fail, because it never sent anything. */}
+                    {status === 'failed' && (
+                      <p className="form-note form-note-error">
+                        That did not go through. Please email me directly at{' '}
+                        <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
+                      </p>
+                    )}
+                    {status === 'unconfigured' && (
+                      <p className="form-note form-note-error">
+                        This form is not connected to an inbox yet, so I would rather
+                        not pretend it sent. Email me at{' '}
+                        <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> and it
+                        reaches me straight away.
+                      </p>
+                    )}
                   </motion.div>
                 )}
               </AnimatePresence>

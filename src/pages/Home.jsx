@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import EmailCta from '../components/EmailCta';
 import { Link } from 'react-router-dom'
 import SiteNav from '../components/SiteNav'
 import SiteFooter from '../components/SiteFooter'
@@ -12,6 +13,9 @@ import './Home.css'
 // No Three.js, no framer-motion, no loading screen. Someone arriving from a WhatsApp
 // link on a mid-range phone should see the headline immediately — the previous
 // version of this page spent its first two seconds on a fake progress bar.
+
+/** Prefilled so the first message already answers the questions I would ask. */
+const CTA_BODY = "Hi Manas,\n\nMy business is:\nWhat eats the most time each week:\nWhat I'd like automated:\n\nBest time to talk:\n";
 
 export default function Home() {
   useEffect(() => {
@@ -161,12 +165,13 @@ export default function Home() {
             month before we discuss anything else.
           </p>
           <div className="site-cta-actions">
-            <a
+            <EmailCta
               className="site-btn site-btn-primary"
-              href="mailto:aroramanasm07@gmail.com?subject=Simplymation%20—%20free%20automation%20for%20my%20business"
+              subject="Simplymation — free automation for my business"
+              body={CTA_BODY}
             >
               Book the free 90 minutes
-            </a>
+            </EmailCta>
             <Link className="site-btn site-btn-ghost" to="/playbooks">
               Read a playbook first
             </Link>

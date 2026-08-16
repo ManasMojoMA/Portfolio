@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import EmailCta from '../components/EmailCta';
 import { Link } from 'react-router-dom'
 import SiteNav from '../components/SiteNav'
 import SiteFooter from '../components/SiteFooter'
@@ -12,6 +13,9 @@ import './PlaybooksIndex.css'
 // plain text, not as tiles with dead links — a grid of "coming soon" boxes reads as
 // vapour to exactly the buyer we want, and one dead link costs more trust than six
 // tiles buy.
+
+/** Prefilled so the first message already answers the questions I would ask. */
+const CTA_BODY = "Hi Manas,\n\nMy business is:\nWhat eats the most time each week:\nWhat I'd like automated:\n\nBest time to talk:\n";
 
 export default function PlaybooksIndex() {
   useEffect(() => {
@@ -83,12 +87,13 @@ export default function PlaybooksIndex() {
             a month before we discuss anything else.
           </p>
           <div className="site-cta-actions">
-            <a
+            <EmailCta
               className="site-btn site-btn-primary"
-              href="mailto:aroramanasm07@gmail.com?subject=Simplymation%20—%20free%20automation%20for%20my%20business"
+              subject="Simplymation — free automation for my business"
+              body={CTA_BODY}
             >
               Book the free 90 minutes
-            </a>
+            </EmailCta>
             <Link className="site-btn site-btn-ghost" to="/">
               Back to the start
             </Link>

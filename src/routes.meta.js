@@ -92,6 +92,18 @@ export const routes = [
 ];
 
 /** Look up metadata for a pathname, falling back to the home route. */
+/**
+ * Whether this path is a real route.
+ *
+ * metaForPath falls back to the home entry for anything unrecognised, which is
+ * right for rendering but hides the distinction the meta hook needs: an unknown
+ * URL still renders the home page, and must not be indexed as a second copy of it.
+ */
+export function isKnownPath(pathname) {
+  const clean = pathname.replace(/\/+$/, '') || '/';
+  return routes.some((r) => r.path === clean);
+}
+
 export function metaForPath(pathname) {
   const clean = pathname.replace(/\/+$/, '') || '/';
   return routes.find((r) => r.path === clean) ?? routes[0];
