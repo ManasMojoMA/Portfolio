@@ -94,10 +94,11 @@ export const demoAccounts = {
   },
 
   'internship-tracker': {
-    status: 'pending',
+    status: 'live',
     entry: 'roles',
-    url: '',
-    roles: ['Student', 'Faculty', 'Admin']
+    url: 'https://internship-tracker-demo.vercel.app',
+    roles: ['Student', 'Faculty Mentor', 'Industry Manager', 'Admin'],
+    note: 'Four buttons, because an internship is signed off by four different people. Start as Student and file a weekly log, approve it as Faculty Mentor, rate the intern as Industry Manager, then issue the certificate as Admin — the PDF is generated for real and lands in Google Drive.'
   }
 };
 

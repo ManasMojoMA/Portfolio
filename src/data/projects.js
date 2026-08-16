@@ -3,9 +3,13 @@
 // All projects rebranded (no university references)
 // Accurate descriptions based on actual codebase
 //
-// Demo URLs and credentials live in data/demoAccounts.js, NOT here. Each project's
-// `demoCredentials` field is legacy and no longer read — keeping two copies of "is
-// this deployed?" is how the live-demo count silently went stale.
+// Demo URLs and access live in data/demoAccounts.js, NOT here. Keeping two copies
+// of "is this deployed?" is how the live-demo count silently went stale.
+//
+// There used to be a `demoCredentials` field on every project carrying a shared
+// email and password. Nothing read it, but it still shipped inside the JS bundle,
+// so a portfolio whose stated standard is that it publishes no credentials was
+// serving a working pair to anyone who opened view-source. Removed entirely.
 // ============================================
 // Extension included so this module also loads under plain Node (verification
 // scripts), not just through Vite's resolver.
@@ -39,8 +43,7 @@ export const projects = [
       { step: 4, title: 'Support Tickets', description: 'Open the Tickets module. View the kanban board, create a new ticket, drag tickets between columns, and see resolution workflows in action.' },
       { step: 5, title: 'Performance & Reports', description: 'Visit Performance tracking to view marks, trends, and exportable reports. The system auto-calculates metrics across all tracked parameters.' }
     ],
-    demoCredentials: { email: 'demo@manasarora.dev', password: 'Demo@2024', url: 'https://chalkzone-ma.vercel.app' },
-    metrics: { timeSaved: '50+ hrs/month', costReduction: '40%', efficiency: '4x faster' }
+    metrics: { roles: '8 roles', modules: 'ERP + LMS + tickets', stack: 'Next.js · Supabase' }
   },
   {
     id: 'placeflow',
@@ -69,8 +72,7 @@ export const projects = [
       { step: 4, title: 'Eligibility Engine', description: 'Set eligibility criteria (min CGPA, branch, batch, skills). The system shows a live count of eligible candidates before publishing.' },
       { step: 5, title: 'Export & Notify', description: 'Export applicant lists to Excel or Google Drive. Push notifications and digest emails are sent automatically to eligible candidates.' }
     ],
-    demoCredentials: { email: 'demo@manasarora.dev', password: 'Demo@2024', url: '' },
-    metrics: { timeSaved: '30+ hrs/week', costReduction: '60%', efficiency: '5x faster' }
+    metrics: { roles: '2 roles', engine: 'Rule-based eligibility', stack: 'React · Supabase · Edge Functions' }
   },
   {
     id: 'employee-appraisal-portal',
@@ -99,8 +101,7 @@ export const projects = [
       { step: 4, title: 'Evaluator Scoring', description: 'Evaluators access dynamic grading panels, score each category based on rubrics, save drafts, and finalize when ready.' },
       { step: 5, title: 'Dean Moderation', description: 'Deans review all finalized evaluations in a unified view, export comprehensive reports in CSV/XLSX format.' }
     ],
-    demoCredentials: { email: 'demo@manasarora.dev', password: 'Demo@2024', url: '' },
-    metrics: { timeSaved: '60+ hrs/cycle', costReduction: '50%', efficiency: '4x faster' }
+    metrics: { roles: '4 roles', hidden: 'Rubric hidden from staff', stack: 'Next.js · Postgres · Prisma' }
   },
   {
     id: 'internship-tracker',
@@ -129,8 +130,7 @@ export const projects = [
       { step: 4, title: 'Final Submission', description: 'Students submit their final internship report (up to 3 attempts). Faculty evaluate with marks (0-100) and detailed feedback.' },
       { step: 5, title: 'Certificate Generation', description: 'After faculty sign-off, the system auto-generates internship certificates in PDF format with all relevant details.' }
     ],
-    demoCredentials: { email: 'demo@manasarora.dev', password: 'Demo@2024', url: '' },
-    metrics: { timeSaved: '25+ hrs/month', costReduction: '35%', efficiency: '3x faster' }
+    metrics: { roles: '5 roles', output: 'Generates real PDFs', stack: 'React · Express · Postgres' }
   },
   {
     id: 'simplyform',
@@ -159,8 +159,7 @@ export const projects = [
       { step: 4, title: 'Collect Responses', description: 'Share the link. Responses stream in real-time to your dashboard. View individual submissions or aggregate analytics.' },
       { step: 5, title: 'Export Data', description: 'Click Export to download all responses as a formatted Excel file. Optionally push data to Google Sheets via webhook.' }
     ],
-    demoCredentials: { email: 'demo@manasarora.dev', password: 'Demo@2024', url: 'https://simplyform.vercel.app' },
-    metrics: { timeSaved: '80% faster creation', costReduction: '100% free', efficiency: '5x faster' }
+    metrics: { entry: 'No sign-up', workspace: 'Private per visitor', stack: 'React · Firebase' }
   },
   {
     id: 'scaleresume',
@@ -189,8 +188,7 @@ export const projects = [
       { step: 4, title: 'AI Enhancement', description: 'Select any bullet point and click the AI button. Gemini rewrites it for maximum impact and clarity.' },
       { step: 5, title: 'Export', description: 'Click Export to download as a pixel-perfect PDF or editable DOCX. The dynamic font-scaler ensures everything fits on one page.' }
     ],
-    demoCredentials: { email: 'Sign in with Google (SSO)', password: 'Not required', url: 'https://scaleresume.vercel.app' },
-    metrics: { timeSaved: '90% faster', costReduction: '100% free', efficiency: '5x match rate' }
+    metrics: { editor: 'WYSIWYG A4', ai: 'AI rewrite per section', stack: 'Next.js · Google SSO' }
   },
   {
     id: 'sip-bootcamp-attendance',
@@ -219,8 +217,7 @@ export const projects = [
       { step: 4, title: 'Geofence Verification', description: 'If enabled, the system checks the student\'s GPS location against the admin\'s position to verify physical presence.' },
       { step: 5, title: 'Export Report', description: 'Admin exports attendance data to XLSX with status tracking (Present, Absent, N/A) for all sessions.' }
     ],
-    demoCredentials: { email: 'demo@manasarora.dev', password: 'Demo@2024', url: '' },
-    metrics: { timeSaved: '95% faster', accuracy: '100% verified', scalability: '500+ users' }
+    metrics: { method: 'QR + geofence', roles: '2 roles', stack: 'React · Firebase' }
   }
 ];
 
