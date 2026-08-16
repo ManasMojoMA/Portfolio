@@ -26,7 +26,16 @@
 /** The Sheet that stores enquiries. Create it, then paste its ID here. */
 var SHEET_ID = 'PASTE_YOUR_SHEET_ID_HERE';
 
-/** Where the notification goes. */
+/**
+ * Where enquiry notifications go — the PUBLIC contact address, the same one
+ * shown on the site and used by every "email me" CTA.
+ *
+ * Deliberately different from KeepWarm.gs, which alerts the account that runs
+ * the scripts. Enquiries are correspondence with real people and belong in the
+ * inbox advertised on the site; infrastructure alerts are private and belong
+ * wherever the dashboards are already open. Worth keeping straight, because
+ * these two scripts otherwise look interchangeable.
+ */
 var NOTIFY_EMAIL = 'aroramanasm07@gmail.com';
 
 /** Submissions accepted per rolling hour, across everyone. */
