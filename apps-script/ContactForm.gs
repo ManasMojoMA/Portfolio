@@ -27,16 +27,22 @@
 var SHEET_ID = 'PASTE_YOUR_SHEET_ID_HERE';
 
 /**
- * Where enquiry notifications go — the PUBLIC contact address, the same one
- * shown on the site and used by every "email me" CTA.
+ * Where form submissions are announced.
  *
- * Deliberately different from KeepWarm.gs, which alerts the account that runs
- * the scripts. Enquiries are correspondence with real people and belong in the
- * inbox advertised on the site; infrastructure alerts are private and belong
- * wherever the dashboards are already open. Worth keeping straight, because
- * these two scripts otherwise look interchangeable.
+ * Note this is NOT the address the site displays. The site shows, and every
+ * "email me" CTA opens, aroramanasm07@gmail.com — so enquiries arrive in two
+ * places depending on how someone chose to make contact: the form notifies
+ * here, a direct email lands there. Both inboxes need watching.
+ *
+ * That is a deliberate choice, not an oversight, but it is the kind of thing
+ * that is obvious today and baffling in six months. If you would rather have one
+ * inbox, either set this to the public address or change ADDRESS in
+ * src/components/EmailCta.jsx to match this one.
+ *
+ * The Sheet is the durable record either way — every submission is a row there
+ * regardless of which inbox the notification reaches.
  */
-var NOTIFY_EMAIL = 'aroramanasm07@gmail.com';
+var NOTIFY_EMAIL = 'aroramanas07@gmail.com';
 
 /** Submissions accepted per rolling hour, across everyone. */
 var MAX_PER_HOUR = 20;
