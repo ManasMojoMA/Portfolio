@@ -32,3 +32,6 @@ Manas_Arora_Resume.*
 # Reference PDFs and local agent config — not part of the site.
 vibe_coding_docs/
 .claude/
+
+.vercel
+.env*

@@ -75,7 +75,16 @@ const Contact = () => {
     try {
       const res = await fetch(endpoint, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        // text/plain, not application/json, and this matters.
+        //
+        // A JSON content-type makes this a "preflighted" cross-origin request,
+        // so the browser sends an OPTIONS probe first. Apps Script web apps do
+        // not answer OPTIONS, so the browser blocks the request before it is
+        // ever sent and the form fails for every visitor — while curl, which
+        // does no preflighting, succeeds. text/plain is a CORS simple request:
+        // no preflight, and Apps Script still receives the raw body in
+        // e.postData.contents, where JSON.parse reads it exactly the same.
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify({
           name: sanitizeInput(formData.name),
           email: sanitizeInput(formData.email),
