@@ -6,6 +6,27 @@ import { projects } from '../data/projects';
 import { demoFor } from '../data/demoAccounts';
 import './Projects.css';
 
+/* The launch link appears twice — on the card in the grid and again in the modal —
+   so it lives in one place. stopPropagation is there for the card: the link sits
+   next to a button that opens the modal, and a click meant for the live app should
+   not also open a dialog behind it. */
+const LaunchAppButton = ({ url, className = '' }) => (
+  <a
+    href={url}
+    target="_blank"
+    rel="noopener noreferrer"
+    className={`launch-app-btn ${className}`.trim()}
+    onClick={(e) => e.stopPropagation()}
+  >
+    Explore the app
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '0.5rem' }} aria-hidden="true">
+      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+      <polyline points="15 3 21 3 21 9"></polyline>
+      <line x1="10" y1="14" x2="21" y2="3"></line>
+    </svg>
+  </a>
+);
+
 const ProjectModal = ({ project, onClose }) => {
   useEffect(() => {
     if (project) {
@@ -131,14 +152,7 @@ const ProjectModal = ({ project, onClose }) => {
                   <div className="modal-section demo-credentials">
                     <div className="demo-head">
                       <h3>Try it</h3>
-                      <a href={demo.url} target="_blank" rel="noopener noreferrer" className="launch-app-btn">
-                        Explore the app
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '0.5rem' }}>
-                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                          <polyline points="15 3 21 3 21 9"></polyline>
-                          <line x1="10" y1="14" x2="21" y2="3"></line>
-                        </svg>
-                      </a>
+                      <LaunchAppButton url={demo.url} />
                     </div>
 
                     {demo.entry === 'roles' && (
@@ -210,6 +224,7 @@ const ProjectModal = ({ project, onClose }) => {
 
 const ProjectCard = ({ project, onClick, variants }) => {
   const cardRef = useRef(null);
+  const demo = demoFor(project.id);
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
 
@@ -264,15 +279,21 @@ const ProjectCard = ({ project, onClick, variants }) => {
         </div>
       </div>
       
-      <button 
-        className="view-details-btn"
-        onClick={onClick}
-      >
-        View Details
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M5 12h14M12 5l7 7-7 7"/>
-        </svg>
-      </button>
+      {/* The live app is the thing worth clicking, so it is on the card and not
+          buried one dialog deep. Guarded on status: a project without a deployed
+          demo must not get a button that goes nowhere. */}
+      <div className="card-actions">
+        {demo.status === 'live' && demo.url && <LaunchAppButton url={demo.url} />}
+        <button 
+          className="view-details-btn"
+          onClick={onClick}
+        >
+          View Details
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </button>
+      </div>
     </motion.div>
   );
 };

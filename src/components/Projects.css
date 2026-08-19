@@ -509,3 +509,74 @@
   border-radius: var(--radius-full);
   padding: var(--space-2) var(--space-4);
 }
+
+/* "Explore the app" — the one action a recruiter is most likely to want, and until
+   now it was an unstyled anchor that read as body text. Tinted rather than solid:
+   the accent is already doing work elsewhere on the page, so a filled blue block
+   would fight the card instead of sitting in it. Same class in the modal and on
+   the card, so the two never drift apart. */
+.launch-app-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.3rem;
+  border-radius: 14px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  text-decoration: none;
+  color: #8ec5ff;
+  background: linear-gradient(135deg, rgba(41, 151, 255, 0.16), rgba(168, 85, 247, 0.12));
+  border: 1px solid rgba(41, 151, 255, 0.32);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease,
+    transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.launch-app-btn:hover {
+  color: #cfe6ff;
+  background: linear-gradient(135deg, rgba(41, 151, 255, 0.28), rgba(168, 85, 247, 0.2));
+  border-color: rgba(41, 151, 255, 0.5);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 8px 22px rgba(41, 151, 255, 0.18);
+  transform: translateY(-2px);
+}
+
+.launch-app-btn:focus-visible {
+  outline: 2px solid rgba(41, 151, 255, 0.6);
+  outline-offset: 3px;
+}
+
+/* Card footer: launch first, details second. Stacked rather than side by side —
+   the grid drops to 340px columns, where "Explore the app" and "View Details"
+   in one row wrap mid-word. */
+.card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-top: auto;
+  padding-top: 1.75rem;
+}
+
+.card-actions .launch-app-btn {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  border-radius: 16px;
+}
+
+/* Two buttons of equal weight would leave neither looking like the main one, so
+   details steps back to an outline once it has company. */
+.card-actions .view-details-btn {
+  margin-top: 0;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #d2d2d7;
+  padding: 0.95rem;
+}
+
+.card-actions .view-details-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
