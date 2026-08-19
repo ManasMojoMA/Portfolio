@@ -82,10 +82,15 @@ function ParticleField() {
 
   return (
     <Points ref={ref} positions={positions} colors={colors} stride={3} frustumCulled={false}>
+      {/* size 0.05 put most of the field below one pixel once sizeAttenuation had
+          divided by distance, so it rasterised to nothing and the background read
+          as flat black. The fog far plane at 20 swallowed the rest: the sphere is
+          radius 15 seen from z=8, so its far half was fogged to the background
+          colour before it could be seen. */}
       <PointMaterial
         transparent
         vertexColors
-        size={0.05}
+        size={0.09}
         sizeAttenuation={true}
         depthWrite={false}
         blending={THREE.AdditiveBlending}
@@ -112,7 +117,7 @@ function CenterGeometry() {
           color="#2997ff" 
           wireframe 
           transparent 
-          opacity={0.03} 
+          opacity={0.07} 
           blending={THREE.AdditiveBlending}
         />
       </mesh>
@@ -125,7 +130,7 @@ export default function Background3D() {
     <div className="background-3d-container">
       <Canvas camera={{ position: [0, 0, 8], fov: 60 }}>
         <color attach="background" args={['#050505']} />
-        <fog attach="fog" args={['#050505', 5, 20]} />
+        <fog attach="fog" args={['#050505', 8, 34]} />
         <ParticleField />
         <CenterGeometry />
       </Canvas>

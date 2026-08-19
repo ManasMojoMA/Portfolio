@@ -33,7 +33,9 @@ export function useHeavyVisualsAllowed() {
       connection?.saveData === true ||
       ['slow-2g', '2g', '3g'].includes(connection?.effectiveType ?? '')
 
-    const weakCpu = (navigator.hardwareConcurrency ?? 8) <= 4
+    // Four cores is an ordinary laptop, not a weak device, and excluding those
+  // silently removed the background for people whose machines render it fine.
+  const weakCpu = (navigator.hardwareConcurrency ?? 8) <= 2
 
     if (reducedMotion || narrow || coarseAndSmall || slowNetwork || weakCpu) {
       return

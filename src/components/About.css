@@ -2,7 +2,9 @@
   position: relative;
   width: 100%;
   padding: 8rem 2rem 4rem;
-  background-color: #000;
+  /* Mostly-opaque rather than transparent: the particle field should still read
+     behind the content, but at full strength it speckles body text. */
+  background-color: rgba(5, 5, 7, 0.88);
   color: #fff;
   display: flex;
   flex-direction: column;

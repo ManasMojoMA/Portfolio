@@ -7,7 +7,8 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background-color: #050505;
+  /* Fully transparent: the hero is where the particle field is meant to be seen. */
+  background-color: transparent;
   color: #ffffff;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   padding: 2rem;
