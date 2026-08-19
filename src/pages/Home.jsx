@@ -39,9 +39,15 @@ export default function Home() {
             <Link to={hero.primaryCta.href} className="site-btn site-btn-primary">
               {hero.primaryCta.label}
             </Link>
-            <a href={hero.secondaryCta.href} className="site-btn site-btn-ghost">
-              {hero.secondaryCta.label}
-            </a>
+            {hero.secondaryCta.href.startsWith('#') ? (
+              <a href={hero.secondaryCta.href} className="site-btn site-btn-ghost">
+                {hero.secondaryCta.label}
+              </a>
+            ) : (
+              <Link to={hero.secondaryCta.href} className="site-btn site-btn-ghost">
+                {hero.secondaryCta.label}
+              </Link>
+            )}
           </div>
           <p className="home-hero-note">{hero.note}</p>
         </section>

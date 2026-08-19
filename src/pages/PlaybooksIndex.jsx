@@ -41,6 +41,21 @@ export default function PlaybooksIndex() {
           </p>
         </section>
 
+        <section className="site-section pbi-try">
+          <div className="pbi-try-card">
+            <h2>Or skip the reading and try it</h2>
+            <p>
+              Paste your customer list and see everyone overdue for something they
+              have paid for before, with the WhatsApp message already written. Works
+              for garages, clinics, salons, AC firms, cafes and more — and nothing you
+              paste leaves your browser.
+            </p>
+            <Link className="site-btn site-btn-primary" to="/try/recall">
+              See who owes you a visit
+            </Link>
+          </div>
+        </section>
+
         <section className="site-section">
           <div className="pbi-list">
             {published.map((pb) => (

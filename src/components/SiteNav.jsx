@@ -9,6 +9,7 @@ import './SiteNav.css'
 // the first thing painted. A CSS transition does the same job for none of the weight.
 
 const links = [
+  { to: '/try/recall', label: 'Free tool' },
   { to: '/playbooks', label: 'Playbooks' },
   { to: '/#how', label: 'How it works' },
   { to: '/portfolio', label: 'For recruiters' },

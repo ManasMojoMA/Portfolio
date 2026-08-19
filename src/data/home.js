@@ -15,8 +15,8 @@ export const hero = {
   headline: "You're doing work a computer should be doing.",
   subhead:
     'Writing the same job card by hand. Chasing customers who never came back. Checking stock by walking to the back room. None of it needs you — and fixing it does not need you to understand a single thing about technology.',
-  primaryCta: { label: 'Find your business', href: '/playbooks' },
-  secondaryCta: { label: 'How this works', href: '#how' },
+  primaryCta: { label: 'See who owes you a visit', href: '/try/recall' },
+  secondaryCta: { label: 'Find your business', href: '/playbooks' },
   note: 'Built for Indian small businesses. Works anywhere.',
 };
 

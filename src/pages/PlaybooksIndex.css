@@ -139,3 +139,33 @@
     transform: none;
   }
 }
+
+/*
+ * The try-it card, above the playbook list.
+ *
+ * Deliberately prominent: someone whose trade has no playbook yet would otherwise
+ * reach "being written next" and have nothing to do. The tool covers seven trades,
+ * so it is useful to far more visitors than the two playbooks are.
+ */
+.pbi-try {
+  padding-block: 0;
+}
+
+.pbi-try-card {
+  padding: var(--space-8);
+  border: 1px solid var(--accent);
+  background: var(--accent-soft);
+  border-radius: var(--space-4);
+}
+
+.pbi-try-card h2 {
+  margin: 0 0 var(--space-3);
+  font-size: clamp(1.4rem, 4vw, 1.9rem);
+}
+
+.pbi-try-card p {
+  margin: 0 0 var(--space-5);
+  max-width: 44rem;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
