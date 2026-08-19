@@ -46,7 +46,7 @@ const HEADER_HINTS = {
   services: ['service', 'services', 'work', 'job', 'done', 'treatment', 'description',
     'particulars', 'item', 'details', 'session', 'procedure', 'package', 'activity',
     'complaint', 'reason', 'repair', 'part', 'what for', 'occasion', 'purpose',
-    'booked for', 'type'],
+    'booked for', 'type', 'what they had', 'had', 'visit for', 'attended for'],
 };
 
 /** Does this row look like headings rather than data? */

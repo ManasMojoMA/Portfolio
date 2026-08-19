@@ -21,6 +21,7 @@
 export const PRESETS = {
   tyre_garage: {
     key: 'tyre_garage',
+    example: {"headers":["Date","Vehicle","Customer","Phone","Work done"],"rows":[["12/08/2025","UP 14 AB 1234","Ramesh Kumar","98765 43210","alignment, balancing"],["03/09/2025","DL 3C AY 9012","Sunita Devi","99887 76655","new tyres"]]},
     label: 'Tyre shop / garage',
     subject: 'vehicle',
     idLabel: 'Vehicle number',
@@ -38,6 +39,7 @@ export const PRESETS = {
 
   dental_clinic: {
     key: 'dental_clinic',
+    example: {"headers":["Patient","File no","Visit date","Treatment","Mobile"],"rows":[["Asha Rao","F-102","12/08/2025","scaling and cleaning","98765 43210"],["Imran Qureshi","F-118","03/09/2025","routine check-up","99887 76655"]]},
     label: 'Dental clinic',
     subject: 'check-up',
     idLabel: 'Patient name or file no.',
@@ -55,6 +57,7 @@ export const PRESETS = {
 
   salon: {
     key: 'salon',
+    example: {"headers":["Date","Client","Phone","Service"],"rows":[["12/08/2025","Priya Menon","98123 45678","hair colour"],["03/09/2025","Sneha Kulkarni","98765 43210","facial"]]},
     label: 'Salon / spa',
     subject: 'appointment',
     idLabel: 'Client name or phone',
@@ -72,6 +75,7 @@ export const PRESETS = {
 
   ac_servicing: {
     key: 'ac_servicing',
+    example: {"headers":["Date","Customer","Address","Contact","Work done"],"rows":[["12/08/2025","Meera Joshi","B-42 Sector 15","99112 23344","AC service"],["03/09/2025","Rakesh Yadav","C-8 Green Park","98765 43210","gas refill"]]},
     label: 'AC / appliance servicing',
     subject: 'unit',
     idLabel: 'Customer name or address',
@@ -88,6 +92,7 @@ export const PRESETS = {
 
   physiotherapy: {
     key: 'physiotherapy',
+    example: {"headers":["Date","Patient","Session","Contact"],"rows":[["12/08/2025","Kabir Shah","therapy session","98765 43210"],["03/09/2025","Anita Menon","follow-up review","98111 22233"]]},
     label: 'Physiotherapy / clinic',
     subject: 'session',
     idLabel: 'Patient name or file no.',
@@ -103,6 +108,7 @@ export const PRESETS = {
 
   hospitality: {
     key: 'hospitality',
+    example: {"headers":["Date","Guest","Phone","What for"],"rows":[["12/08/2025","Rohit Malhotra","98765 43210","anniversary party"],["03/09/2025","Anjali Verma","98111 22233","table booking"]]},
     label: 'Cafe / restaurant / resort',
     subject: 'visit',
     idLabel: 'Guest name or phone',
@@ -125,6 +131,7 @@ export const PRESETS = {
 
   other: {
     key: 'other',
+    example: {"headers":["Date","Customer","Phone","What they had"],"rows":[["12/08/2025","A Sharma","98765 43210","whatever you do"],["03/09/2025","B Gupta","99887 76655","the other thing you do"]]},
     label: 'Something else',
     subject: 'service',
     idLabel: 'Customer name or reference',

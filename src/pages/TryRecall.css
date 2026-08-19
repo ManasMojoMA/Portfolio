@@ -577,3 +577,185 @@
   padding-top: var(--space-12);
   border-top: 1px solid var(--line);
 }
+
+/* ── Worked example ──────────────────────────────────────────────────────── */
+
+/*
+ * Shown above the input because an empty textarea with a line of prose gives no
+ * sense of the shape wanted — the most confusing thing about the first version.
+ * A table describing a table is redundant; showing one is not.
+ */
+.try-example {
+  margin-bottom: var(--space-6);
+}
+
+.try-example-cap {
+  margin: 0 0 var(--space-3);
+  color: var(--ink-muted);
+  font-size: 0.87rem;
+  line-height: 1.6;
+  max-width: 44rem;
+}
+
+.try-example-scroll {
+  overflow-x: auto;
+  border: 1px dashed var(--line);
+  border-radius: var(--space-3);
+  background: var(--surface-tint);
+}
+
+.try-example-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  min-width: 34rem;
+}
+
+.try-example-table th {
+  text-align: left;
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--line);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
+
+.try-example-table td {
+  padding: var(--space-3) var(--space-4);
+  color: var(--ink-soft);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+/* ── Paste / type toggle ─────────────────────────────────────────────────── */
+
+.try-modes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.try-mode {
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--line);
+  border-radius: var(--space-2);
+  background: var(--surface);
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.try-mode:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.try-mode-on {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+
+.try-mode-on:hover {
+  color: #fff;
+}
+
+/* ── Hand entry ──────────────────────────────────────────────────────────── */
+
+.try-entry {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* Column headings on wide screens; each field carries its own label on narrow
+   ones, where a shared header row would scroll away from what it describes. */
+.try-entry-head {
+  display: none;
+}
+
+.try-entry-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--space-3);
+}
+
+.try-entry-cell {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.try-entry-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.try-entry-remove {
+  justify-self: end;
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 1px solid var(--line);
+  border-radius: var(--space-2);
+  background: var(--surface);
+  color: var(--ink-muted);
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.try-entry-remove:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.try-entry-remove:not(:disabled):hover {
+  border-color: #c0392b;
+  color: #c0392b;
+}
+
+@media (min-width: 760px) {
+  .try-entry-head {
+    display: grid;
+    grid-template-columns: 9rem 1fr 9rem 1fr 2.4rem;
+    gap: var(--space-3);
+    padding: 0 var(--space-4);
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ink-muted);
+  }
+
+  .try-entry-row {
+    grid-template-columns: 9rem 1fr 9rem 1fr 2.4rem;
+    align-items: center;
+    padding: var(--space-3) var(--space-4);
+  }
+
+  /* The per-field labels are redundant once the header row is visible, but stay
+     in the DOM for screen readers. */
+  .try-entry-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .try-entry-remove {
+    justify-self: center;
+  }
+}

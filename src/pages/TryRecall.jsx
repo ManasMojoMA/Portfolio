@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import SiteNav from '../components/SiteNav';
 import SiteFooter from '../components/SiteFooter';
 import EmailCta from '../components/EmailCta';
+import RecallRowEntry from '../components/RecallRowEntry';
 import { parsePasted } from '../lib/recall/paste.js';
 import { parseJobs, findDue, renderTemplate } from '../lib/recall/engine.js';
 import { whatsAppLink } from '../lib/recall/phone.js';
@@ -51,6 +52,9 @@ export default function TryRecall() {
   const [mapping, setMapping] = useState(null);
   const [userTouchedMapping, setUserTouchedMapping] = useState(false);
   const [showSkipped, setShowSkipped] = useState(false);
+  // Paste is the default and the main path; typing is the second door for anyone
+  // without a spreadsheet open, or who wants to try three rows first.
+  const [mode, setMode] = useState('paste');
 
   // Switching trade replaces the trade-specific defaults but never what has been
   // pasted — making someone retype their book because they changed a dropdown
@@ -204,17 +208,72 @@ export default function TryRecall() {
           </button>
         </div>
 
-        <label className="try-field try-field-wide">
-          <span className="try-label">Your customer book</span>
-          <textarea
-            className="try-textarea"
-            value={raw}
-            onChange={(e) => setRaw(e.target.value)}
-            rows={9}
-            spellCheck={false}
-            placeholder="Paste here. A heading row is fine — it will be spotted and skipped. Dates can be 12/08/2025, 12-8-25 or 12 Aug 2025 (day first)."
-          />
-        </label>
+        {/* A worked example beats prose describing one. An empty box with a
+            sentence of instructions gives no sense of the shape wanted, which is
+            the single most confusing thing about this page. */}
+        <div className="try-example">
+          <p className="try-example-cap">
+            A book looks roughly like this. Yours does not have to match — column
+            order and headings are worked out for you.
+          </p>
+          <div className="try-example-scroll">
+            <table className="try-example-table">
+              <thead>
+                <tr>
+                  {preset.example.headers.map((h) => (
+                    <th key={h}>{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {preset.example.rows.map((r, i) => (
+                  <tr key={i}>
+                    {r.map((c, j) => (
+                      <td key={j}>{c}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div className="try-modes" role="tablist" aria-label="How to enter your data">
+          <button
+            type="button"
+            role="tab"
+            aria-selected={mode === 'paste'}
+            className={`try-mode${mode === 'paste' ? ' try-mode-on' : ''}`}
+            onClick={() => setMode('paste')}
+          >
+            Paste from a spreadsheet
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={mode === 'type'}
+            className={`try-mode${mode === 'type' ? ' try-mode-on' : ''}`}
+            onClick={() => setMode('type')}
+          >
+            Type a few rows instead
+          </button>
+        </div>
+
+        {mode === 'paste' ? (
+          <label className="try-field try-field-wide">
+            <span className="try-label">Your customer book</span>
+            <textarea
+              className="try-textarea"
+              value={raw}
+              onChange={(e) => setRaw(e.target.value)}
+              rows={9}
+              spellCheck={false}
+              placeholder="Paste here. A heading row is fine — it will be spotted and skipped. Dates can be 12/08/2025, 12-8-25 or 12 Aug 2025 (day first)."
+            />
+          </label>
+        ) : (
+          <RecallRowEntry preset={preset} onChange={setRaw} />
+        )}
       </section>
 
       {parsed && mapping && (
