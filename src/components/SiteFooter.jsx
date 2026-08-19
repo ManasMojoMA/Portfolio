@@ -23,7 +23,7 @@ export default function SiteFooter() {
       </div>
 
       <p className="site-footer-alt">
-        Hiring rather than buying? <Link to="/portfolio">The engineering portfolio is here.</Link>
+        Hiring rather than buying? <Link to="/portfolio">The portfolio is here.</Link>
       </p>
     </footer>
   )
