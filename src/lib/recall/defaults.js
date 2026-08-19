@@ -73,6 +73,18 @@ const BUILDERS = {
     ['', 'Nisha Bhatt', 'F-12 Saket', '9812345678', 'gas refill'],
   ],
 
+  hospitality: (h) => [
+    ['Date', 'Guest', 'Phone', 'What for', 'Covers'],
+    [h.dmy(14), 'Rohit Malhotra', '9876543210', 'anniversary party', '24'],
+    [h.dmy(13), 'Anjali Verma', '98111 22233', 'table booking', '4'],
+    [h.dot(11), 'Rohit Malhotra', '9876543210', 'table booking', '2'],
+    [h.nam(9), 'Farhan Ali', '+91-99887-76655', 'catering order', '60'],
+    [h.dmy(8), '', '9123456780 (office)', 'table booking', '6'],
+    [h.dmy(7), 'Kavya Reddy', '080-41112222', 'birthday party', '18'],
+    [h.dmy(5), 'Anjali Verma', '9811122233', 'table booking', '2'],
+    ['', 'Sameer Joshi', '9765432109', 'table booking', '4'],
+  ],
+
   physiotherapy: (h) => [
     ['Date', 'Patient', 'Session', 'Contact'],
     [h.dmy(9), 'Kabir Shah', 'therapy session', '9876543210'],

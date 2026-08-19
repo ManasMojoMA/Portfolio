@@ -101,6 +101,28 @@ export const PRESETS = {
     ],
   },
 
+  hospitality: {
+    key: 'hospitality',
+    label: 'Cafe / restaurant / resort',
+    subject: 'visit',
+    idLabel: 'Guest name or phone',
+    idIsRegistration: false,
+    business: 'The Courtyard Cafe',
+    template:
+      'Hi {{name}}, it has been {{monthsAgo}} months since you were last with us on {{lastDone}}. We have a table free this weekend if you fancy it — {{business}}',
+    // Hospitality is the one trade here where "overdue" needs stating carefully.
+    // Nobody is overdue for lunch. What these intervals actually catch is a
+    // REGULAR who has quietly stopped coming — the birthday party you catered
+    // last year, the couple who came monthly and then did not. That is a real and
+    // uncomfortable thing to see in your own book, and it is worth seeing.
+    services: [
+      { key: 'table', label: 'a table booking', matches: ['table', 'dine', 'dinner', 'lunch', 'booking', 'cover'], intervalMonths: 3, typicalPrice: 1200 },
+      { key: 'party', label: 'a party or event', matches: ['party', 'event', 'birthday', 'anniversary', 'function'], intervalMonths: 12, typicalPrice: 15000 },
+      { key: 'catering', label: 'catering', matches: ['catering', 'order', 'bulk'], intervalMonths: 6, typicalPrice: 8000 },
+      { key: 'stay', label: 'a stay', matches: ['stay', 'room', 'booking', 'checkin', 'check-in'], intervalMonths: 12, typicalPrice: 6000 },
+    ],
+  },
+
   other: {
     key: 'other',
     label: 'Something else',

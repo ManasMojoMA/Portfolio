@@ -515,3 +515,65 @@
     width: 100%;
   }
 }
+
+/* ── Fixes for the shell swap ────────────────────────────────────────────── */
+
+/*
+ * This page was originally built on .pb-* classes lifted from the playbook. Those
+ * live in PlaybookTyreGarage.css, which this page never imports, so every one of
+ * them resolved to nothing: no section padding, no max-width, no vertical rhythm.
+ * That is why the content sat flush against the left edge and the numbered steps
+ * ran into each other. It now uses the .site-* primitives that site.css actually
+ * provides, and the rules below cover the two classes that had no equivalent.
+ */
+
+.try-details {
+  border: 1px solid var(--line);
+  border-radius: var(--space-3);
+  background: var(--surface);
+  padding: var(--space-4) var(--space-5);
+}
+
+.try-details > summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.try-details[open] > summary {
+  margin-bottom: var(--space-4);
+}
+
+.try-note {
+  margin-top: var(--space-3);
+  color: var(--ink-muted);
+  font-size: 0.87rem;
+  line-height: 1.65;
+}
+
+/*
+ * .site-section carries a full 4rem of vertical padding, which is right for a
+ * landing page but far too airy for five consecutive steps of one form. Tighten
+ * the run so the steps read as a single sequence, and keep the generous spacing
+ * either side of it.
+ */
+.try-step {
+  padding-block: var(--space-8);
+}
+
+.try-step + .try-step {
+  padding-top: 0;
+}
+
+.try-hero {
+  padding-bottom: var(--space-8);
+}
+
+.try-results {
+  padding-block: var(--space-12);
+}
+
+.try-next {
+  padding-top: var(--space-12);
+  border-top: 1px solid var(--line);
+}

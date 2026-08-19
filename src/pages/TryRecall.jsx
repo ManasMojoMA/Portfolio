@@ -143,10 +143,10 @@ export default function TryRecall() {
     <div className="site">
       <SiteNav />
 
-      <header className="pb-hero try-hero">
-        <p className="pb-eyebrow">Free · nothing to install · nothing uploaded</p>
+      <header className="site-section try-hero">
+        <p className="site-eyebrow">Free · nothing to install · nothing uploaded</p>
         <h1>See who owes you a visit</h1>
-        <p className="pb-hero-lede">
+        <p className="site-lede">
           Paste your customer book. This finds everyone overdue for something they
           have <strong>paid for before</strong>, and writes the WhatsApp message for
           you. You read it and tap send.
@@ -157,7 +157,7 @@ export default function TryRecall() {
         </p>
       </header>
 
-      <section className="pb-section try-step">
+      <section className="site-section try-step">
         <h2 className="try-step-title">
           <span className="try-step-num">1</span> What kind of business is this?
         </h2>
@@ -179,7 +179,7 @@ export default function TryRecall() {
         </div>
       </section>
 
-      <section className="pb-section try-step">
+      <section className="site-section try-step">
         <h2 className="try-step-title">
           <span className="try-step-num">2</span> Paste your book
         </h2>
@@ -218,7 +218,7 @@ export default function TryRecall() {
       </section>
 
       {parsed && mapping && (
-        <section className="pb-section pb-section-tint try-step">
+        <section className="site-section site-section-tint try-step">
           <h2 className="try-step-title">
             <span className="try-step-num">3</span> Check the columns
           </h2>
@@ -266,7 +266,7 @@ export default function TryRecall() {
       )}
 
       {parsed && missing.length === 0 && services.length === 0 && (
-        <section className="pb-section try-step">
+        <section className="site-section try-step">
           <h2 className="try-step-title">
             <span className="try-step-num">4</span> What do people come back for?
           </h2>
@@ -279,7 +279,7 @@ export default function TryRecall() {
       )}
 
       {result && (
-        <section className="pb-section pb-section-tint try-results">
+        <section className="site-section site-section-tint try-results">
           <h2 className="try-step-title">Who owes you a visit</h2>
 
           <div className="try-summary">
@@ -391,7 +391,7 @@ export default function TryRecall() {
             </div>
           )}
 
-          <details className="pb-assumptions try-template">
+          <details className="try-details try-template">
             <summary>Change the services, intervals or wording</summary>
             <ServiceEditor services={services} onChange={setServices} />
             <label className="try-field try-field-wide try-template-field">
@@ -403,7 +403,7 @@ export default function TryRecall() {
                 rows={3}
               />
             </label>
-            <p className="pb-assumptions-note">
+            <p className="try-note">
               name, subject, service, lastDone, monthsAgo and business are filled in
               per customer. Anything else in double braces is left visible, so a typo
               shows up here rather than in a message to a customer.
@@ -412,7 +412,7 @@ export default function TryRecall() {
         </section>
       )}
 
-      <section className="pb-section try-next">
+      <section className="site-section try-next">
         <h2>What this is not doing</h2>
         <ul className="try-honest">
           <li>
@@ -433,7 +433,7 @@ export default function TryRecall() {
         </ul>
 
         <h2>If you want this running by itself</h2>
-        <p className="pb-section-lede">
+        <p className="site-lede">
           The same thing on your own Google Sheet, updating every morning without you
           pasting anything — that is the part I set up. It stays on free Google tools;
           there is no software subscription to me.

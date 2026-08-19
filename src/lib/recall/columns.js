@@ -39,12 +39,14 @@ const NEGATIVE_HINTS = [
 
 const HEADER_HINTS = {
   date: ['date', 'day', 'visit', 'when', 'dt', 'tarikh'],
-  subject: ['vehicle', 'reg', 'registration', 'number plate', 'plate', 'car', 'bike', 'patient', 'file', 'client', 'id', 'unit'],
-  customer: ['customer', 'name', 'client name', 'patient name', 'owner', 'party'],
+  subject: ['vehicle', 'reg', 'registration', 'number plate', 'plate', 'car', 'bike', 'patient', 'file', 'client', 'id', 'unit', 'guest', 'member'],
+  customer: ['customer', 'name', 'client name', 'patient name', 'owner', 'party',
+    'guest', 'member'],
   phone: ['phone', 'mobile', 'contact', 'number', 'whatsapp', 'cell', 'no.'],
   services: ['service', 'services', 'work', 'job', 'done', 'treatment', 'description',
     'particulars', 'item', 'details', 'session', 'procedure', 'package', 'activity',
-    'complaint', 'reason', 'repair', 'part'],
+    'complaint', 'reason', 'repair', 'part', 'what for', 'occasion', 'purpose',
+    'booked for', 'type'],
 };
 
 /** Does this row look like headings rather than data? */
