@@ -1,0 +1,324 @@
+/**
+ * Styling for the Recall Engine try-it page.
+ *
+ * Reuses the playbook's .pb-* shell (hero, section, tint) so this reads as part of
+ * the same buyer-facing site rather than a bolted-on tool. Only what is genuinely
+ * new to this page lives here.
+ *
+ * Designed for a phone first. The person most likely to open this is standing in a
+ * workshop holding one, and the WhatsApp links only make sense on a device that
+ * has WhatsApp.
+ */
+
+.try-hero {
+  padding-bottom: 1.5rem;
+}
+
+.try-privacy {
+  max-width: 46rem;
+  margin: 1rem auto 0;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  background: rgba(16, 185, 129, 0.08);
+  border-radius: 0.6rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #065f46;
+}
+
+.try-input-section {
+  padding-top: 1rem;
+}
+
+.try-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-end;
+  margin-bottom: 1.25rem;
+}
+
+.try-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 15rem;
+}
+
+.try-field-wide {
+  width: 100%;
+}
+
+.try-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.try-input,
+.try-textarea {
+  width: 100%;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.55rem;
+  font-size: 0.95rem;
+  font-family: inherit;
+  background: #fff;
+  color: #111827;
+}
+
+.try-textarea {
+  /* Monospace so pasted columns line up and a misaligned row is visible. */
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  resize: vertical;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.try-textarea-small {
+  font-family: inherit;
+  font-size: 0.9rem;
+  white-space: pre-wrap;
+  margin-top: 0.75rem;
+}
+
+.try-input:focus,
+.try-textarea:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 1px;
+  border-color: transparent;
+}
+
+.try-sample-btn {
+  padding: 0.7rem 1.1rem;
+  border: 1px dashed #9ca3af;
+  border-radius: 0.55rem;
+  background: transparent;
+  color: #374151;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.try-sample-btn:hover {
+  border-color: #2563eb;
+  color: #1d4ed8;
+  background: rgba(37, 99, 235, 0.05);
+}
+
+.try-hint {
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+/* ── Results ─────────────────────────────────────────────────────────────── */
+
+.try-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.try-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.9rem 1.2rem;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.7rem;
+  min-width: 11rem;
+}
+
+.try-stat-value {
+  font-size: 1.9rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #111827;
+}
+
+.try-stat-label {
+  font-size: 0.8rem;
+  color: #6b7280;
+  line-height: 1.4;
+}
+
+.try-caveat,
+.try-empty {
+  font-size: 0.88rem;
+  color: #6b7280;
+  line-height: 1.65;
+  max-width: 46rem;
+  margin-bottom: 1.25rem;
+}
+
+.try-empty {
+  padding: 1rem 1.15rem;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.7rem;
+  color: #374151;
+}
+
+.try-table-wrap {
+  overflow-x: auto;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.7rem;
+}
+
+.try-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  min-width: 44rem;
+}
+
+.try-table th {
+  text-align: left;
+  padding: 0.8rem 1rem;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #6b7280;
+}
+
+.try-table td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid #f3f4f6;
+  vertical-align: top;
+  color: #374151;
+}
+
+.try-table tr:last-child td {
+  border-bottom: none;
+}
+
+.try-veh {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-weight: 600;
+  color: #111827;
+  white-space: nowrap;
+}
+
+.try-overdue {
+  display: block;
+  font-size: 0.78rem;
+  color: #b45309;
+  margin-top: 0.15rem;
+}
+
+.try-wa {
+  display: inline-block;
+  padding: 0.45rem 0.8rem;
+  background: #25d366;
+  color: #05341b;
+  border-radius: 0.45rem;
+  font-weight: 700;
+  font-size: 0.82rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.try-wa:hover {
+  background: #1fb855;
+}
+
+.try-nolink {
+  font-size: 0.82rem;
+  color: #9ca3af;
+  font-style: italic;
+  /* The raw number sits in the title attribute so the owner can see what was
+     actually in the book and fix it. */
+  cursor: help;
+  border-bottom: 1px dotted #d1d5db;
+}
+
+/* ── Skipped rows ────────────────────────────────────────────────────────── */
+
+.try-skipped {
+  margin-top: 1.25rem;
+}
+
+.try-skipped-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #b45309;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.try-skipped-list {
+  margin: 0.6rem 0 0;
+  padding-left: 1.2rem;
+  font-size: 0.86rem;
+  color: #6b7280;
+  line-height: 1.8;
+}
+
+.try-skipped-note {
+  margin-top: 0.5rem;
+  font-size: 0.83rem;
+  color: #9ca3af;
+  line-height: 1.6;
+  max-width: 42rem;
+}
+
+.try-template {
+  margin-top: 1.5rem;
+}
+
+/* ── Closing section ─────────────────────────────────────────────────────── */
+
+.try-honest {
+  max-width: 46rem;
+  margin: 0 0 2rem;
+  padding-left: 1.1rem;
+  line-height: 1.75;
+  color: #374151;
+}
+
+.try-honest li {
+  margin-bottom: 0.7rem;
+}
+
+.try-back {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.try-back a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.try-back a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .try-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .try-sample-btn {
+    width: 100%;
+  }
+
+  .try-stat {
+    flex: 1 1 100%;
+  }
+}

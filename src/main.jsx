@@ -10,6 +10,8 @@ import './index.css'
 const Home = lazy(() => import('./pages/Home.jsx'))
 const PlaybooksIndex = lazy(() => import('./pages/PlaybooksIndex.jsx'))
 const PlaybookTyreGarage = lazy(() => import('./pages/PlaybookTyreGarage.jsx'))
+// The one page a garage owner can actually *use* rather than read.
+const TryRecall = lazy(() => import('./pages/TryRecall.jsx'))
 const Portfolio = lazy(() => import('./pages/Portfolio.jsx'))
 
 // Must live inside BrowserRouter to read the current location.
@@ -22,6 +24,7 @@ function AppRoutes() {
         <Route path="/" element={<Home />} />
         <Route path="/playbooks" element={<PlaybooksIndex />} />
         <Route path="/playbooks/tyre-garage" element={<PlaybookTyreGarage />} />
+          <Route path="/try/recall" element={<TryRecall />} />
         <Route path="/portfolio" element={<Portfolio />} />
         {/* Unknown paths land on the buyer-facing home rather than a dead end. */}
         <Route path="*" element={<Home />} />

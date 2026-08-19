@@ -322,6 +322,21 @@ export default function PlaybookTyreGarage() {
         </section>
 
         {/* ---------- CTA ---------- */}
+        <section className="pb-cta pb-cta-try" id="try">
+          <h2>Or just see it, on your own numbers, right now</h2>
+          <p>
+            Paste your job book and this will show you every customer overdue for
+            something they have paid for before, with the WhatsApp message already
+            written. It runs in your browser — your customer list is not uploaded
+            anywhere, and there is nothing to sign up for.
+          </p>
+          <div className="pb-cta-actions">
+            <Link className="pb-btn pb-btn-primary" to="/try/recall">
+              See who is due at my garage
+            </Link>
+          </div>
+        </section>
+
         <section className="pb-cta" id="talk">
           <h2>One free automation. Your garage. No money, no contract.</h2>
           <p>

@@ -78,6 +78,23 @@ export const routes = [
     priority: '0.9',
   },
   {
+    path: '/try/recall',
+    title: 'See who is due at your garage — free tool | Simplymation',
+    // The buyer-facing description has one job: make it clear this is a thing you
+    // USE, not another page you read. 'Free', 'nothing to install' and 'nothing
+    // uploaded' answer the three objections a sceptical owner raises first.
+    description:
+      'Paste your job book and see every vehicle overdue for a service it has had before, with the WhatsApp message already written. Free, nothing to install, and nothing you paste leaves your browser.',
+    ogTitle: 'Paste your job book. See who owes you a visit.',
+    ogDescription:
+      'Every vehicle overdue for alignment, balancing or new tyres — with the message ready to send on WhatsApp. Runs in your browser; your customer list never leaves your phone.',
+    // Reuses the garage card deliberately: this is the same story, one step further
+    // along, and a missing og:image fails the build by design.
+    ogImage: '/og-tyre-garage.png',
+    changefreq: 'monthly',
+    priority: '0.9',
+  },
+  {
     path: '/portfolio',
     title: 'Manas Arora | Full-Stack & AI Engineering Portfolio',
     description:
