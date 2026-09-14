@@ -20,7 +20,7 @@ export const projects = [
     id: 'chalkzone-erp',
     title: 'ChalkZone — Unified ERP & LMS Platform',
     subtitle: 'End-to-End Organizational Management Suite',
-    description: 'A comprehensive enterprise resource planning system integrated with AI-powered learning management — featuring attendance automation, performance tracking, support tickets, placements, resume building, faculty appraisals, and an AI Knowledge Base with RAG-powered assistant.',
+    description: 'A comprehensive enterprise resource planning system integrated with AI-powered learning management — featuring attendance automation, performance tracking, support tickets, a placements CRM with outreach analytics, resume building, faculty appraisals, and an AI Knowledge Base with RAG-powered assistant.',
     longDescription: `ChalkZone unifies 8+ operational modules into a single intelligent platform. Built on Next.js 16 with Supabase PostgreSQL and Google Gemini AI, it features RAG-powered search using pgvector embeddings, a kanban-style support ticket system, real-time attendance tracking, performance analytics, and a fully integrated resume builder. Multi-role access control supports students, faculty, HR, managers, admin, and executives — each with tailored dashboards and workflows.`,
     category: 'Enterprise Software',
     tags: ['ERP', 'LMS', 'AI/RAG', 'Automation', 'Multi-Role'],
@@ -33,6 +33,7 @@ export const projects = [
       'AI Knowledge Base with RAG (pgvector cosine search + Gemini embeddings)',
       'AI Assistant powered by Gemini with contextual RAG retrieval',
       'Kanban-style support ticket management with drag-and-drop',
+      'Placements CRM — company tiers, relationship stages, recruiter contacts and an outreach log, with a leadership analytics dashboard',
       'Multi-role access: Student, Faculty, HR, Manager, Admin, Super Admin, Parent, Executive',
       'Real-time analytics dashboards with exportable reports'
     ],
@@ -41,7 +42,8 @@ export const projects = [
       { step: 2, title: 'Explore Attendance', description: 'Navigate to the Attendance module. View attendance records, mark attendance for sessions, and see analytics by date range and section.' },
       { step: 3, title: 'AI Knowledge Base', description: 'Go to the AI KB module. Browse documents, ask questions to the AI Assistant — it uses RAG to search embedded documents and provide accurate answers.' },
       { step: 4, title: 'Support Tickets', description: 'Open the Tickets module. View the kanban board, create a new ticket, drag tickets between columns, and see resolution workflows in action.' },
-      { step: 5, title: 'Performance & Reports', description: 'Visit Performance tracking to view marks, trends, and exportable reports. The system auto-calculates metrics across all tracked parameters.' }
+      { step: 5, title: 'Placements CRM & analytics', description: 'Explore as HR or Admin and open Placements. Analytics shows outreach activity, the company funnel and a team leaderboard; Companies (CRM) is where relationships are tracked. Admin also manages the placement team. Explore as Faculty to see the same page without it — access follows the role.' },
+      { step: 6, title: 'Performance & Reports', description: 'Visit Performance tracking to view marks, trends, and exportable reports. The system auto-calculates metrics across all tracked parameters.' }
     ],
     metrics: { roles: '8 roles', modules: 'ERP + LMS + tickets', stack: 'Next.js · Supabase' }
   },
