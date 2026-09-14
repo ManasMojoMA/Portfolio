@@ -35,3 +35,6 @@ vibe_coding_docs/
 
 .vercel
 .env*
+
+# Identifies the originals behind the demos; this repository is public.
+DEMOS.private.md

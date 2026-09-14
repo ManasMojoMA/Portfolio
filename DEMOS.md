@@ -49,6 +49,10 @@ live data through a public login:
 | `mpidcsyrdtgfamriwjsg.supabase.co` | Appraisal Portal (original) | Also referenced from `university-erp-lms/legacy/` — same database, two checkouts |
 | `bmlrzkvbfmdnzemhyemw.supabase.co` | Internship Tracker (original) | |
 
+Further production backends and hosting projects are recorded only in
+`DEMOS.private.md`, which is gitignored: this repository is public, and the full
+list says more about the originals than belongs here.
+
 Safe demo backends currently in use:
 
 | Project ref | Demo |
@@ -60,6 +64,19 @@ Safe demo backends currently in use:
 Before deploying any demo, check the connection string against this table. The demo
 folders deliberately ship only `.env.example`, so there is nothing to copy by
 accident — the risk is pasting the wrong value in by hand.
+
+**Check the Vercel link too, before any CLI command in a demo folder.** A demo copied
+from its original can carry the original's `.vercel/project.json`, which points the
+CLI at the original's production project. A plain `vercel deploy --prod` from that
+folder would then replace the live original with the demo build. This has happened
+once and was stopped only by luck — details in `DEMOS.private.md`. Before running
+the CLI in any demo folder, read `.vercel/project.json` and confirm `orgId` is
+`team_f0oVXO1E4Here9yogeezOXcl`.
+
+The ChalkZone demo also deploys itself: the `chalkzone` project builds `main` from
+GitHub, so **pushing is deploying**. Push the database schema first, build and test
+locally second, and push code last — code that expects tables the database lacks
+takes the live demo down.
 
 ### Rules for every demo account
 
